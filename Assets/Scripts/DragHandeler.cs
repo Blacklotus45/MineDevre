@@ -4,12 +4,11 @@ using System.Collections;
 using UnityEngine.EventSystems;
 
 public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
-
+    
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("OnBeginDrag");
-
-
+	
     }
 
     public void OnDrag(PointerEventData eventData)
