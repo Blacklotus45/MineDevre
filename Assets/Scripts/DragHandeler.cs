@@ -69,7 +69,8 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             Destroy(icon);                                                          // Destroy icon on item drop
         }
 //        MakeVisible(true);                                                          // Make item visible in cell
-        {
+		if (!DestroyOnDropped.DestroyedFlag)
+		{
         	GameObject go;
         	switch (draggedItem.typeOfItem) {
         		case ElementType.Wire:
