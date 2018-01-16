@@ -96,6 +96,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
 			go.transform.position = spawnPosition();
         }
+		DestroyOnDropped.DestroyedFlag = false;
         draggedItem = null;
         icon = null;
     }
