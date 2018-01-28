@@ -12,7 +12,8 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     	Resistance,
     	Battery,
     	Switch,
-    	Lamp
+    	Lamp,
+		Earthing
     }
 
 	static public DragHandeler draggedItem;
@@ -88,6 +89,9 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 				case ElementType.Lamp:
 					go = Instantiate(ElementList.TheList.RcElements[4]);
 					break;
+			case ElementType.Earthing:
+				go = Instantiate(ElementList.TheList.RcElements[5]);
+				break;
         		default:
         			Debug.LogWarning("ElementType not initialized");
         			go = new GameObject();
