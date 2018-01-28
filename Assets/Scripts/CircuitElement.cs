@@ -10,7 +10,8 @@ public class CircuitElement : MonoBehaviour {
     	Resistance,
     	Battery,
     	Switch,
-    	Lamp
+    	Lamp,
+		Earthing
     }
 
 	public ElementType typeOfItem;
