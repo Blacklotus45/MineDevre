@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212103825937358926}
   - component: {fileID: 61706021336369428}
   - component: {fileID: 114303993430793226}
+  - component: {fileID: 114593212569607636}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -39,6 +40,7 @@ GameObject:
   - component: {fileID: 4292233872522140}
   - component: {fileID: 212150505149226912}
   - component: {fileID: 58743856107868948}
+  - component: {fileID: 114877059285491534}
   m_Layer: 0
   m_Name: EdgeRight
   m_TagString: Untagged
@@ -56,6 +58,7 @@ GameObject:
   - component: {fileID: 4799220766122478}
   - component: {fileID: 212956402575176986}
   - component: {fileID: 58306200039763790}
+  - component: {fileID: 114203454731375260}
   m_Layer: 0
   m_Name: EdgeLeft
   m_TagString: Untagged
@@ -159,6 +162,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6299281, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &114203454731375260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518545042356968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f237af8f36830b648af83a30e57e8726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftEdge: 1
 --- !u!114 &114303993430793226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,6 +185,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cbebabda6db2146bf7312c62f8adfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114593212569607636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099822012193398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34aa377e52fbac74496bd3ebcad98f2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfItem: 4
+  rightSide: {fileID: 0}
+  leftSide: {fileID: 0}
+--- !u!114 &114877059285491534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1399728634493258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f237af8f36830b648af83a30e57e8726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftEdge: 0
 --- !u!212 &212103825937358926
 SpriteRenderer:
   m_ObjectHideFlags: 1

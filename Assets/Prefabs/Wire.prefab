@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4704405627566910}
   - component: {fileID: 212320626263227032}
   - component: {fileID: 58080387106019068}
+  - component: {fileID: 114303728789984480}
   m_Layer: 0
   m_Name: EdgeLeft
   m_TagString: Untagged
@@ -39,6 +40,7 @@ GameObject:
   - component: {fileID: 212022828531046810}
   - component: {fileID: 61322425399578886}
   - component: {fileID: 114578171383544402}
+  - component: {fileID: 114756174860503800}
   m_Layer: 0
   m_Name: Wire
   m_TagString: Untagged
@@ -56,6 +58,7 @@ GameObject:
   - component: {fileID: 4582570192035976}
   - component: {fileID: 212143930165403916}
   - component: {fileID: 58747768225880478}
+  - component: {fileID: 114288713242802858}
   m_Layer: 0
   m_Name: EdgeRight
   m_TagString: Untagged
@@ -159,6 +162,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.62987506, y: 0.20882261}
   m_EdgeRadius: 0
+--- !u!114 &114288713242802858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1794238015599008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f237af8f36830b648af83a30e57e8726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftEdge: 0
+--- !u!114 &114303728789984480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253575846015770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f237af8f36830b648af83a30e57e8726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftEdge: 1
 --- !u!114 &114578171383544402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,6 +197,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cbebabda6db2146bf7312c62f8adfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114756174860503800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1764299096321646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34aa377e52fbac74496bd3ebcad98f2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfItem: 0
+  rightSide: {fileID: 0}
+  leftSide: {fileID: 0}
 --- !u!212 &212022828531046810
 SpriteRenderer:
   m_ObjectHideFlags: 1
