@@ -91,7 +91,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 					break;
 				case ElementType.Earthing:
 					go = Instantiate(ElementList.TheList.RcElements[5]);
-				break;
+					break;
         		default:
         			Debug.LogWarning("ElementType not initialized");
         			go = new GameObject();
