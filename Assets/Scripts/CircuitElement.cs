@@ -11,7 +11,8 @@ public class CircuitElement : MonoBehaviour {
     	Battery,
     	Switch,
     	Lamp,
-		Earthing
+		Earthing,
+		Connector
     }
 
 	public ElementType typeOfItem;
