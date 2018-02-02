@@ -21,12 +21,12 @@ public class CircuitElement : MonoBehaviour {
 
 	public void ConnectToLeft(GameObject other)
 	{
-		leftSide = other.GetComponent<CircuitElement>();
+		leftSide = other.transform.parent.GetComponent<CircuitElement>();
 	}
 
 	public void ConnectToRight(GameObject other)
 	{
-		rightSide = other.GetComponent<CircuitElement>();
+		rightSide = other.transform.parent.GetComponent<CircuitElement>();
 	}
 	
 

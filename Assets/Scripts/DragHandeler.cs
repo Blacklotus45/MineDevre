@@ -27,7 +27,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
+//        Debug.Log("OnBeginDrag");
 
         draggedItem = this;                                                         // Set as dragged item
         icon = new GameObject("Icon");                                              // Create object for item's icon
@@ -63,7 +63,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+//        Debug.Log("OnEndDrag");
 
 		if (icon != null)
         {
