@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212320626263227032}
   - component: {fileID: 114303728789984480}
   - component: {fileID: 114255111903837404}
-  - component: {fileID: 136264052029447270}
+  - component: {fileID: 135046831513983778}
   m_Layer: 0
   m_Name: EdgeLeft
   m_TagString: Untagged
@@ -39,8 +39,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4035398549603996}
   - component: {fileID: 212627680485735132}
-  - component: {fileID: 61809383532045294}
   - component: {fileID: 114954019110975946}
+  - component: {fileID: 65718631478980388}
   m_Layer: 0
   m_Name: Middle
   m_TagString: Untagged
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 212143930165403916}
   - component: {fileID: 114288713242802858}
   - component: {fileID: 114235858839765456}
-  - component: {fileID: 136433035788465700}
+  - component: {fileID: 135711462051632982}
   m_Layer: 0
   m_Name: EdgeRight
   m_TagString: Untagged
@@ -138,31 +138,18 @@ Transform:
   m_Father: {fileID: 4272210145722250}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61809383532045294
-BoxCollider2D:
+--- !u!65 &65718631478980388
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1607497883055590}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0.03, y: 0, z: 0.03, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.66, y: 0.04}
-    newSize: {x: 1, y: 0.7}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114235858839765456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abc5d1f17f69a44ab551880965c504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &136264052029447270
-CapsuleCollider:
+--- !u!135 &135046831513983778
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -245,12 +232,11 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.6000001
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 0.30000004
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &136433035788465700
-CapsuleCollider:
+--- !u!135 &135711462051632982
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -258,9 +244,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 0.3
-  m_Height: 0.59999996
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212143930165403916
 SpriteRenderer:

@@ -27,7 +27,7 @@ public class ObjectClicker : MonoBehaviour {
                 if (hit.transform != null)
                 {
                     actionMenuScript.selectedElement = hit.transform.parent.gameObject;
-                    PrintName(hit.transform.parent.gameObject);
+//                    PrintName(hit.transform.parent.gameObject);
                     actionPanel.SetActive(true);
                 }
             }
@@ -35,11 +35,7 @@ public class ObjectClicker : MonoBehaviour {
             {
                 //actionPanel.SetActive(false);
             }
-        
-            
         }
-        
-        
     }
 
     private void PrintName(GameObject go)
