@@ -16,6 +16,7 @@ public class CircuitElement : MonoBehaviour {
     }
 
 	public ElementType typeOfItem;
+	public bool isLocked = false;
 
 	public CircuitElement rightSide = null;
 	public CircuitElement leftSide = null;
@@ -23,11 +24,13 @@ public class CircuitElement : MonoBehaviour {
 	public void ConnectToLeft(GameObject other)
 	{
 		leftSide = other.transform.parent.GetComponent<CircuitElement>();
+		isLocked = true;
 	}
 
 	public void ConnectToRight(GameObject other)
 	{
 		rightSide = other.transform.parent.GetComponent<CircuitElement>();
+		isLocked = true;
 	}
 	
 

@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class Connector : MonoBehaviour {
 
-	public static LinkedList<CircuitElement> ItemList = new LinkedList<CircuitElement>();
+	public enum ElementType
+    {
+    	Wire,
+    	Resistance,
+    	Battery,
+    	Switch,
+    	Lamp,
+		Earthing,
+		Connector
+    }
+
+	public ElementType typeOfItem = ElementType.Connector;
+
+	public LinkedList<CircuitElement> ItemList = new LinkedList<CircuitElement>();
 
 	public void ConnectElement (CircuitElement connectEle)
 	{

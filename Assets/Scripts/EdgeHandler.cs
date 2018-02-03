@@ -58,20 +58,27 @@ public class EdgeHandler : MonoBehaviour {
 		this.transform.position = snapPosition;
 	}
 
-	void OnMouseUpAsButton()
+	void OnMouseUpAsButton ()
 	{
-		Debug.Log("OnmouseUpasButton from: " + name + " of " + transform.parent.name);
+		Debug.Log ("OnmouseUpasButton from: " + name + " of " + transform.parent.name);
 
 		RaycastHit[] hit;
-		Ray rei = Camera.main.ScreenPointToRay(Input.mousePosition);
-		hit = Physics.RaycastAll(rei, 35f);
+		Ray rei = Camera.main.ScreenPointToRay (Input.mousePosition);
+		hit = Physics.RaycastAll (rei, 35f);
 		if (hit.Length != 0)
 		{
 			for (int i = 0; i < hit.Length; i++)
 			{
-				if (hit[i].transform.gameObject != gameObject)
+				if (hit [i].transform.gameObject != gameObject)
 				{
-					hit[i].transform.GetComponent<EdgeHandler>().ConnectToParent(this);
+					if (hit [i].transform.GetComponent<EdgeHandler> () == null)
+					{
+						hit [i].transform.GetComponent<Connector> ().ConnectElement (gameObject.GetComponentInParent<CircuitElement>());
+					}
+					else
+					{
+						hit [i].transform.GetComponent<EdgeHandler> ().ConnectToParent (this);
+					}
 					break;
 				}
 			}			
