@@ -45,7 +45,21 @@ public class Strecth : MonoBehaviour {
         newRot.z = rotation;
         middle.rotation = newRot;
 
-		
+    }
 
+    public void StrecthTo(Vector3 lastPos)
+    {
+		float lengthOfWire = Vector3.Magnitude(lastPos - anchor.position);
+        float rotation = Mathf.Atan((lastPos.y - anchor.position.y) / (lastPos.x - anchor.position.x)) / 2;
+
+		middle.position = (transform.position + anchor.position) / 2;
+
+		Vector3 scale = middle.localScale;
+		scale.x = lengthOfWire - (1.836f * 0.3f);
+        middle.localScale = scale;
+
+        Quaternion newRot = middle.rotation;
+        newRot.z = rotation;
+        middle.rotation = newRot;
     }
 }

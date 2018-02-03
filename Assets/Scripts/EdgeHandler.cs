@@ -14,13 +14,13 @@ public class EdgeHandler : MonoBehaviour {
 			if (LeftEdge)
 			{
 				parent.ConnectToLeft (otherElement.gameObject);
-				otherElement.ConnectToParentNonRec(this);
 			}
 			else 
 			{
 			  	parent.ConnectToRight (otherElement.gameObject);
-				otherElement.ConnectToParentNonRec(this);
 			}
+			otherElement.ConnectToParentNonRec(this);
+			gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 		}
 		else
 		{
@@ -36,11 +36,15 @@ public class EdgeHandler : MonoBehaviour {
 			if (LeftEdge)
 			{
 				parent.ConnectToLeft (otherElement.gameObject);
+
 			}
 			else 
 			{
-			  parent.ConnectToRight (otherElement.gameObject);
+			  	parent.ConnectToRight (otherElement.gameObject);
 			}
+			Snap(otherElement.gameObject.transform.position);
+			gameObject.GetComponent<Strecth>().StrecthTo(otherElement.gameObject.transform.position);
+			gameObject.GetComponent<SpriteRenderer>().enabled = false;
 		}
 		else
 		{
@@ -48,33 +52,19 @@ public class EdgeHandler : MonoBehaviour {
 		}
 	}
 
-//	void Update ()
-//	{
-//		Debug.DrawRay(Camera.main.transform.position, transform.position + (Vector3.forward*20f), Color.red, 0.33f);
-//		Debug.Log("Camera Location "+Camera.main.transform.position+ "\nObjLocation"+ transform.position);
-//	}
+	private void Snap (Vector3 snapPosition)
+	{
+		Debug.Log("I'm " + gameObject.name + " of the " + transform.parent.name);
+		this.transform.position = snapPosition;
+	}
 
 	void OnMouseUpAsButton()
 	{
-		Debug.Log("OnmouseUpasButton from: " + name);
-
-//		RaycastHit[] hit;
-//		hit = Physics.RaycastAll(Camera.main.transform.position, transform.position + (Vector3.forward*20f), 100f);
-//		for (int i = 0; i < hit.Length; i++)
-//		{
-//			Debug.Log("Number of hits " + hit.Length);
-//			if (hit[i].transform.gameObject != gameObject)
-//			{
-//				Debug.Log("I hit to " + hit[i].transform.gameObject.ToString());
-//
-//				break;
-//			}
-//		}
+		Debug.Log("OnmouseUpasButton from: " + name + " of " + transform.parent.name);
 
 		RaycastHit[] hit;
 		Ray rei = Camera.main.ScreenPointToRay(Input.mousePosition);
 		hit = Physics.RaycastAll(rei, 35f);
-//		Debug.DrawRay(rei.origin, Vector3.forward*35f, Color.red, 3f);
 		if (hit.Length != 0)
 		{
 			for (int i = 0; i < hit.Length; i++)
@@ -87,7 +77,6 @@ public class EdgeHandler : MonoBehaviour {
 			}			
 		}
 
-//		GetComponent<CircleCollider2D>().enabled = true;
 	}
 
 }
