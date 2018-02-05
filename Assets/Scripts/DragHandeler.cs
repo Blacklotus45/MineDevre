@@ -114,7 +114,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 										/ Camera.main.pixelWidth;
 		float spawnX = Input.mousePosition.x * horizontalUnitperPixel - (orthoSize * aspectRatio);
 		float spawnY = Input.mousePosition.y * verticalUnitperPixel - orthoSize;
-		return new Vector3(spawnX, spawnY, 20);
+		return new Vector3(spawnX, spawnY, 20f);
     }
 
 }
