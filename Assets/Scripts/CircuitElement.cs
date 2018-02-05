@@ -21,20 +21,20 @@ public class CircuitElement : MonoBehaviour {
 	public CircuitElement rightSide = null;
 	public CircuitElement leftSide = null;
 
-	public void ConnectToLeft(EdgeHandler other)
+	public void ConnectToLeft(GameObject other)
 	{
 		leftSide = other.GetComponentInParent<CircuitElement>();
 		isLocked = true;
 	}
 
-	public void ConnectToRight(EdgeHandler other)
+	public void ConnectToRight(GameObject other)
 	{
 		rightSide = other.GetComponentInParent<CircuitElement>();
 		isLocked = true;
 	}
 
-	//No need for paremeter?
-	public void DisconnectFromLeft(EdgeHandler other)
+
+	public void DisconnectFromLeft(GameObject other)
 	{
 		leftSide = null;
 		if (rightSide == null || leftSide == null)
@@ -43,8 +43,8 @@ public class CircuitElement : MonoBehaviour {
 		}
 	}
 
-	//No need for paremeter?
-	public void DisconnectFromRight(EdgeHandler other)
+
+	public void DisconnectFromRight(GameObject other)
 	{
 		rightSide = null;
 		if (rightSide == null || leftSide == null)

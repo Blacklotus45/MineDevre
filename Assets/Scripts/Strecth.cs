@@ -9,12 +9,12 @@ public class Strecth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		foreach (Transform transform in transform.parent)
+		foreach (Transform edgeTransform in transform.parent)
 		{
 			//Debug.Log("I'm " + gameObject.name +  " I find the " + transform.gameObject.name);
-			if (transform != this.transform)
+			if (edgeTransform != this.transform)
 			{
-				anchor = transform;
+				anchor = edgeTransform;
 				break;
 			}
 		}

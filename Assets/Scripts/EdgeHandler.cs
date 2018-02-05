@@ -16,7 +16,7 @@ public class EdgeHandler : MonoBehaviour {
 	}
 
 	//Working
-	public void ConnectToParent (EdgeHandler otherElement)
+	public void ConnectToParent (GameObject otherElement)
 	{
 		CircuitElement parent = gameObject.GetComponentInParent<CircuitElement> ();
 		if (parent != null)
@@ -29,7 +29,7 @@ public class EdgeHandler : MonoBehaviour {
 			{
 			  	parent.ConnectToRight (otherElement);
 			}
-			otherElement.ConnectToParentNonRec(this);
+			otherElement.GetComponent<EdgeHandler>().ConnectToParentNonRec(gameObject);
 			edgeGFX.color = Color.red;
 		}
 		else
@@ -39,7 +39,7 @@ public class EdgeHandler : MonoBehaviour {
 	}
 
 	//Working
-	public void ConnectToParentNonRec (EdgeHandler otherElement)
+	public void ConnectToParentNonRec (GameObject otherElement)
 	{
 		CircuitElement parent = gameObject.GetComponentInParent<CircuitElement> ();
 		if (parent != null)
@@ -61,7 +61,7 @@ public class EdgeHandler : MonoBehaviour {
 	}
 
 	//Needs testing
-	public void DisconnectFromParent (EdgeHandler otherElement)
+	public void DisconnectFromParent (GameObject otherElement)
 	{
 		CircuitElement parent = gameObject.GetComponentInParent<CircuitElement> ();
 		if (parent != null)
@@ -133,12 +133,12 @@ public class EdgeHandler : MonoBehaviour {
 						}
 						else
 						{
-							hit [i].transform.GetComponent<Connector> ().ConnectElement (this);
+							hit [i].transform.GetComponent<Connector> ().ConnectElement (gameObject);
 						}
 					}
 					else
 					{
-						hit [i].transform.GetComponent<EdgeHandler> ().ConnectToParent (this);
+						hit [i].transform.GetComponent<EdgeHandler> ().ConnectToParent (gameObject);
 					}
 					break;
 				}

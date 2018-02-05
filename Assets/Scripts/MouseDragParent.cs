@@ -15,13 +15,6 @@ public class MouseDragParent : MonoBehaviour {
 				return;
 			}
 		}
-		if (gameObject.GetComponentInParent<Connector> () != null)
-		{
-			if (gameObject.GetComponentInParent<Connector> ().ItemList.Count == 0)
-			{
-				return;
-			}
-		}
 
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition) - transform.localPosition;
