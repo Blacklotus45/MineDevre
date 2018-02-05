@@ -6,6 +6,16 @@ public class EdgeHandler : MonoBehaviour {
 
 	public bool LeftEdge;
 
+	private Strecth strecthHandler;
+	private SpriteRenderer edgeGFX;
+
+	void Start ()
+	{
+		strecthHandler = GetComponent<Strecth>();
+		edgeGFX = GetComponent<SpriteRenderer>();
+	}
+
+	//Working
 	public void ConnectToParent (EdgeHandler otherElement)
 	{
 		CircuitElement parent = gameObject.GetComponentInParent<CircuitElement> ();
@@ -13,14 +23,14 @@ public class EdgeHandler : MonoBehaviour {
 		{
 			if (LeftEdge)
 			{
-				parent.ConnectToLeft (otherElement.gameObject);
+				parent.ConnectToLeft (otherElement);
 			}
 			else 
 			{
-			  	parent.ConnectToRight (otherElement.gameObject);
+			  	parent.ConnectToRight (otherElement);
 			}
 			otherElement.ConnectToParentNonRec(this);
-			gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+			edgeGFX.color = Color.red;
 		}
 		else
 		{
@@ -28,6 +38,7 @@ public class EdgeHandler : MonoBehaviour {
 		}
 	}
 
+	//Working
 	public void ConnectToParentNonRec (EdgeHandler otherElement)
 	{
 		CircuitElement parent = gameObject.GetComponentInParent<CircuitElement> ();
@@ -35,16 +46,13 @@ public class EdgeHandler : MonoBehaviour {
 		{
 			if (LeftEdge)
 			{
-				parent.ConnectToLeft (otherElement.gameObject);
-
+				parent.ConnectToLeft (otherElement);
 			}
 			else 
 			{
-			  	parent.ConnectToRight (otherElement.gameObject);
+			  	parent.ConnectToRight (otherElement);
 			}
-			Snap(otherElement.gameObject.transform.position);
-			gameObject.GetComponent<Strecth>().StrecthTo(otherElement.gameObject.transform.position);
-			gameObject.GetComponent<SpriteRenderer>().enabled = false;
+			Snap(otherElement.transform.position);
 		}
 		else
 		{
@@ -52,12 +60,57 @@ public class EdgeHandler : MonoBehaviour {
 		}
 	}
 
-	private void Snap (Vector3 snapPosition)
+	//Needs testing
+	public void DisconnectFromParent (EdgeHandler otherElement)
 	{
-		Debug.Log("I'm " + gameObject.name + " of the " + transform.parent.name);
-		this.transform.position = snapPosition;
+		CircuitElement parent = gameObject.GetComponentInParent<CircuitElement> ();
+		if (parent != null)
+		{
+			if (LeftEdge)
+			{
+				parent.DisconnectFromLeft (otherElement);
+			}
+			else 
+			{
+			  	parent.DisconnectFromRight (otherElement);
+			}
+			Desnap(otherElement.transform.position);
+		}
+		else
+		{
+			Debug.LogWarning("Found an edge circle with disconnect problem");
+		}
 	}
 
+	//Snaps the position to given position and updates GFX
+	private void Snap (Vector3 snapPosition)
+	{
+		//transform the location of edge
+		this.transform.position = snapPosition;
+
+		//strecth the wire/middle zone
+		strecthHandler.StrecthTo(snapPosition);
+
+		//disable the yellow circle/sprite
+		edgeGFX.enabled = false;
+	}
+
+	//WIP
+	private void Desnap (Vector3 oldSnapPosition)
+	{
+		//new location away from oldSnapPosition
+
+
+		//strect to new loaction
+		strecthHandler.StrecthTo(transform.position);
+
+
+		//enable yellow circle/sprite
+		edgeGFX.enabled = true;
+
+	}
+
+	//Needs testing???
 	void OnMouseUp ()
 	{
 		Debug.Log ("OnmouseUpasButton from: " + name + " of " + transform.parent.name);
