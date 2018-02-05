@@ -13,7 +13,8 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     	Battery,
     	Switch,
     	Lamp,
-		Earthing
+		Earthing,
+		Connector
     }
 
 	static public DragHandeler draggedItem;
@@ -91,6 +92,9 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 					break;
 				case ElementType.Earthing:
 					go = Instantiate(ElementList.TheList.RcElements[5]);
+					break;
+				case ElementType.Connector:
+					go = Instantiate(ElementList.TheList.RcElements[6]);
 					break;
         		default:
         			Debug.LogWarning("ElementType not initialized");

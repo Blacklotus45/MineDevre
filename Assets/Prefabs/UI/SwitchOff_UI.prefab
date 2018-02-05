@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 224668344122546466}
   - component: {fileID: 222239497756865856}
-  - component: {fileID: 114960090860642468}
   - component: {fileID: 225335983644350026}
-  - component: {fileID: 114138503070919088}
+  - component: {fileID: 114960090860642468}
   - component: {fileID: 114225922588012410}
+  - component: {fileID: 114138503070919088}
   m_Layer: 5
   m_Name: SwitchOff_UI
   m_TagString: Untagged
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5223f8d3e0f4575a398d0093e7771b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfItem: 0
+  typeOfItem: 3
 --- !u!114 &114225922588012410
 MonoBehaviour:
   m_ObjectHideFlags: 1

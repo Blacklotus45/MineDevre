@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 224386420825994376}
   - component: {fileID: 222711303400282388}
-  - component: {fileID: 114779040000077966}
   - component: {fileID: 225918322423857528}
-  - component: {fileID: 114558287674125832}
+  - component: {fileID: 114779040000077966}
   - component: {fileID: 114233416184132290}
+  - component: {fileID: 114558287674125832}
   m_Layer: 5
   m_Name: Resistance_UI
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5223f8d3e0f4575a398d0093e7771b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfItem: 0
+  typeOfItem: 1
 --- !u!114 &114779040000077966
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 224387005721338692}
   - component: {fileID: 222315354524192540}
-  - component: {fileID: 114497896660555172}
   - component: {fileID: 225189256676122998}
-  - component: {fileID: 114749045218557644}
+  - component: {fileID: 114497896660555172}
   - component: {fileID: 114942550129458570}
+  - component: {fileID: 114749045218557644}
   m_Layer: 5
   m_Name: Lamp_UI
   m_TagString: Untagged
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5223f8d3e0f4575a398d0093e7771b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeOfItem: 0
+  typeOfItem: 4
 --- !u!114 &114942550129458570
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -14,19 +14,28 @@ public class ObjectClicker : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+	{
 
-        if (Input.GetMouseButtonDown(0))
-        {
+		if (Input.GetMouseButtonDown (0))
+		{
           
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100.0f))
-            {
-                if (hit.transform != null)
-                {
-                    actionMenuScript.selectedElement = hit.transform.parent.gameObject;
+			if (Physics.Raycast (ray, out hit, 100.0f))
+			{
+				if (hit.transform != null)
+				{
+					//done for connector object, more efficient structure maybe used here
+					if (hit.transform.parent == null)
+					{
+						actionMenuScript.selectedElement = hit.transform.gameObject;	
+					}
+					else
+					{
+						actionMenuScript.selectedElement = hit.transform.parent.gameObject;
+					}
 //                    PrintName(hit.transform.parent.gameObject);
                     actionPanel.SetActive(true);
                 }

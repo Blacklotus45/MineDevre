@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 224558034457856288}
   - component: {fileID: 222967398753714306}
-  - component: {fileID: 114813836215956450}
   - component: {fileID: 225143956054215530}
-  - component: {fileID: 114490073426174562}
+  - component: {fileID: 114813836215956450}
   - component: {fileID: 114841062206555984}
+  - component: {fileID: 114490073426174562}
   m_Layer: 5
   m_Name: Wire_UI
   m_TagString: Untagged

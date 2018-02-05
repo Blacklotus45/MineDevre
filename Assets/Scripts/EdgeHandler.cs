@@ -58,7 +58,7 @@ public class EdgeHandler : MonoBehaviour {
 		this.transform.position = snapPosition;
 	}
 
-	void OnMouseUpAsButton ()
+	void OnMouseUp ()
 	{
 		Debug.Log ("OnmouseUpasButton from: " + name + " of " + transform.parent.name);
 
@@ -67,13 +67,21 @@ public class EdgeHandler : MonoBehaviour {
 		hit = Physics.RaycastAll (rei, 35f);
 		if (hit.Length != 0)
 		{
+			Debug.Log ("Number of colliders found: " + hit.Length);
 			for (int i = 0; i < hit.Length; i++)
 			{
 				if (hit [i].transform.gameObject != gameObject)
 				{
 					if (hit [i].transform.GetComponent<EdgeHandler> () == null)
 					{
-						hit [i].transform.GetComponent<Connector> ().ConnectElement (gameObject.GetComponentInParent<CircuitElement>());
+						if (hit [i].transform.GetComponent<Connector> () == null)
+						{
+							continue;
+						}
+						else
+						{
+							hit [i].transform.GetComponent<Connector> ().ConnectElement (this);
+						}
 					}
 					else
 					{
