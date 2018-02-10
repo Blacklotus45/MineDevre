@@ -6,6 +6,8 @@ public class ActionMenu : MonoBehaviour {
 
     public GameObject selectedElement;
 
+	public GameObject[] edges;
+
 	// Use this for initialization
 	void Start () {
 
@@ -38,12 +40,22 @@ public class ActionMenu : MonoBehaviour {
         }
     }
 
+	//Working
     public void deleteObject()
     {
         Destroy(selectedElement);
         print("Object is destroyed");
         gameObject.SetActive(false);
     }
+
+	//Wip
+	public void splitObject()
+	{
+		edges = selectedElement.GetComponentsInChildren<GameObject> ();
+		print ("Edges:\n");
+
+	}
+
 
     private void moveObject()
     {
