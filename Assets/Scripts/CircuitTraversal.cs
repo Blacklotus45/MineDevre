@@ -91,9 +91,17 @@ public class CircuitTraversal : MonoBehaviour {
 
 					bool redirection = false;
 
-					//Make it known
+					//Did we processed this before?
+					if (iterator.isChecked == true)
+					{
+						Debug.Log ("I'm already processed " + iterator.name);
+						CurrentTraversalElements.RemoveFirst();
+						continue;
+					}
+					//Make it known if it's not parsed
 					Debug.Log (iterator.name);
 					iterator.isChecked = true;
+					
 
 					//What element are we and what actions should we take
 					switch (iterator.typeOfItem)
@@ -137,10 +145,9 @@ public class CircuitTraversal : MonoBehaviour {
 						break;
 					}
 
-					if (redirection)
-					{
-						continue;
-					}
+					//Sometimes we need to stop traversing, battery resistance things
+					if (redirection) continue;
+					
 
 					//What comes next?
 					nextItem = iterator.GetNeighbour ();
@@ -185,59 +192,6 @@ public class CircuitTraversal : MonoBehaviour {
 			}
 
 			Debug.Log("Traversal is Finished correctly!!");
-
-			//delete under here if needed
-
-//			CurrentTraversalElements.AddLast (firstNode.connectedNode);
-
-//			CircuitElement previous = firstNode;
-
-
-			/*while (CurrentTraversalElements.Count > 0)
-			{
-				CircuitElement iterationElement = CurrentTraversalElements.First.Value;
-				CircuitElement nextElement = iterationElement.GetNeighbour (previous);
-				if (nextElement == null)
-				{
-					Debug.Log ("Next element is Null");
-					CurrentTraversalElements.RemoveFirst();
-				}
-				else
-				{
-					Debug.Log ("Next element is " + nextElement.gameObject.name);
-				}
-
-
-				if (nextElement != null)
-				{
-					switch (nextElement.typeOfItem)
-					{
-					case CircuitElement.ElementType.Wire:
-						previous = iterationElement;
-						CurrentTraversalElements.AddLast(nextElement);
-						CurrentTraversalElements.RemoveFirst();
-						break;
-					case CircuitElement.ElementType.Lamp:
-					case CircuitElement.ElementType.Resistance:
-						previous = iterationElement;
-						CurrentTraversalElements.AddLast(nextElement);
-						CurrentTraversalElements.RemoveFirst();
-						break;
-					case CircuitElement.ElementType.Battery:
-
-					case CircuitElement.ElementType.Switch:
-
-					case CircuitElement.ElementType.Connector:
-
-					case CircuitElement.ElementType.Earthing:
-
-					default:
-						break;
-					}
-				}
-			}
-			*/
-
 		}
 		else
 		{
