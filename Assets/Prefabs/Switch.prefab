@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4009785784473024}
-  - component: {fileID: 114336810318570458}
+  - component: {fileID: 114466615460877658}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftEdge: 1
---- !u!114 &114336810318570458
+--- !u!114 &114466615460877658
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -179,13 +179,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1092808007779986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34aa377e52fbac74496bd3ebcad98f2f, type: 3}
+  m_Script: {fileID: 11500000, guid: df2ca87cf51fe314d84d4d22c785d761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfItem: 3
   isLocked: 0
+  isChecked: 0
   rightSide: {fileID: 0}
   leftSide: {fileID: 0}
+  isClosed: 1
 --- !u!114 &114512479885995012
 MonoBehaviour:
   m_ObjectHideFlags: 1

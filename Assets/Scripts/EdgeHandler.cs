@@ -113,14 +113,12 @@ public class EdgeHandler : MonoBehaviour {
 	//Needs testing???
 	void OnMouseUp ()
 	{
-		Debug.Log ("OnmouseUpasButton from: " + name + " of " + transform.parent.name);
 
 		RaycastHit[] hit;
 		Ray rei = Camera.main.ScreenPointToRay (Input.mousePosition);
 		hit = Physics.RaycastAll (rei, 35f);
 		if (hit.Length != 0)
 		{
-			Debug.Log ("Number of colliders found: " + hit.Length);
 			for (int i = 0; i < hit.Length; i++)
 			{
 				if (hit [i].transform.gameObject != gameObject)
@@ -129,7 +127,15 @@ public class EdgeHandler : MonoBehaviour {
 					{
 						if (hit [i].transform.GetComponent<Connector> () == null)
 						{
-							continue;
+							if (hit [i].transform.GetComponentInParent<EarthlingNode>() == null)
+							{
+								continue;
+							}
+							else
+							{
+								hit [i].transform.GetComponentInParent<EarthlingNode>().ConnectTo(gameObject);
+							}
+
 						}
 						else
 						{

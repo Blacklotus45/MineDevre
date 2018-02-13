@@ -37,10 +37,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4981717613713220}
-  - component: {fileID: 114577208964620424}
+  - component: {fileID: 114783793660718000}
   m_Layer: 0
   m_Name: Earthing
-  m_TagString: Untagged
+  m_TagString: Earth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abc5d1f17f69a44ab551880965c504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114577208964620424
+--- !u!114 &114783793660718000
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -103,13 +103,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1965330952344698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34aa377e52fbac74496bd3ebcad98f2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 525d14e438e704f4c8091d8fde71376f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfItem: 5
   isLocked: 0
   rightSide: {fileID: 0}
   leftSide: {fileID: 0}
+  connectedNode: {fileID: 0}
 --- !u!212 &212311997213407634
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -20,10 +20,6 @@ public class AddValue : MonoBehaviour {
 	
 	}
 
-	public void Awake(){
-	
-	}
-
 	public void GetInput(){
 
 		voltageValue = voltageField.text;

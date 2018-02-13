@@ -15,6 +15,10 @@ public class MouseDragParent : MonoBehaviour {
 				return;
 			}
 		}
+		else if (gameObject.GetComponentInParent<EarthlingNode>() != null)
+		{
+			//check if its connected
+		}
 
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition) - transform.localPosition;
