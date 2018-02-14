@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4009785784473024}
   - component: {fileID: 114466615460877658}
+  - component: {fileID: 114831476742465826}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -76,7 +77,7 @@ GameObject:
   - component: {fileID: 114053954901355856}
   m_Layer: 0
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Anahtar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,6 +201,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftEdge: 0
+--- !u!114 &114831476742465826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1092808007779986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b0bfd8e5fed3bf468155a2f5e42c991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteAnahtar1: {fileID: 21300000, guid: 33cf2bff5df9a474692c152371493a03, type: 3}
+  spriteAnahtar2: {fileID: 21300000, guid: 6b2a4123019ef784985b1b6ad80c6971, type: 3}
 --- !u!135 &135239214124433172
 SphereCollider:
   m_ObjectHideFlags: 1

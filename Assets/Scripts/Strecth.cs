@@ -6,9 +6,12 @@ public class Strecth : MonoBehaviour {
 
 	public Transform middle;
 	private Transform anchor;
+	Vector3 firstPosition;
+	int count = 1;
 
 	// Use this for initialization
 	void Start () {
+		count = 1;
 		foreach (Transform edgeTransform in transform.parent)
 		{
 			//Debug.Log("I'm " + gameObject.name +  " I find the " + transform.gameObject.name);
@@ -19,15 +22,21 @@ public class Strecth : MonoBehaviour {
 			}
 		}
 	}
+		
 
 	void OnMouseDrag()
     {
-    	
+		if (count == 1) {
+			firstPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30f);
+			count = 0;
+			Debug.Log ("Mouse FİRST : _>>>>>>>>>>>>>>>>>>>>>>>>>>>>:"+firstPosition);
+		}
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30f);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition) ;
 
         transform.position = objPosition;
-
+		Debug.Log ("Sınır x---->: "+Input.mousePosition.x);
+		Debug.Log ("Sınır y---->: "+Input.mousePosition.y);
 		StrecthTo (objPosition);
     }
 
