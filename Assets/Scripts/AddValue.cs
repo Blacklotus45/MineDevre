@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class AddValue : MonoBehaviour {
 
+	public Voltage vol;
+	public ResistanceValue res;
 
 	public GameObject element;
 
@@ -14,18 +16,19 @@ public class AddValue : MonoBehaviour {
 	public string resistanceValue;
 
 
-	public InputField resistanceField;
+	public InputField valueField;
 
 
 
 	public void Start () {
 
 
-		resistanceField.ActivateInputField ();
-	
+		valueField.ActivateInputField ();
+		vol = GameObject.Find("Battery_UI").GetComponent<Voltage>();
+		res = GameObject.Find("Resistance_UI").GetComponent<ResistanceValue>();
 	}
 	public void Update(){
-		resistanceField.ActivateInputField ();
+		valueField.ActivateInputField ();
 	}
 
 	public void GetInput(){
@@ -35,13 +38,15 @@ public class AddValue : MonoBehaviour {
 		objectName = element.name;
 			
 		if(objectName =="Battery(Clone)"){
-			voltageValue = resistanceField.text;
-			int.Parse (voltageValue);
+
+			vol.voltage =int.Parse (valueField.text); 
 		}
 
 		if (objectName == "Resistance(Clone)") {
-			resistanceValue = resistanceField.text;
-			int.Parse (resistanceValue);
+
+			res.resistance = int.Parse (valueField.text);
+
+
 		} else {
 			
 			Start();
