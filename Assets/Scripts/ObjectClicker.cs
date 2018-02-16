@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ObjectClicker : MonoBehaviour {
 
+	public AddValue av;
+
+
+
     public GameObject actionPanel;
 
     public ActionMenu actionMenuScript;
@@ -11,6 +15,7 @@ public class ObjectClicker : MonoBehaviour {
     void Start()
     {
         actionMenuScript = GameObject.Find("Action Panel").GetComponent<ActionMenu>();
+		av = GameObject.Find("AddController").GetComponent<AddValue>();
     }
 
     // Update is called once per frame
@@ -35,9 +40,13 @@ public class ObjectClicker : MonoBehaviour {
 					else
 					{
 						actionMenuScript.selectedElement = hit.transform.parent.gameObject;
+
+						av.element = hit.transform.parent.gameObject;
+
 					}
 //                    PrintName(hit.transform.parent.gameObject);
                     actionPanel.SetActive(true);
+
                 }
             }
             else

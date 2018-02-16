@@ -6,35 +6,53 @@ using UnityEngine.UI;
 public class AddValue : MonoBehaviour {
 
 
+	public GameObject element;
 
 
 
 	public string voltageValue;
 	public string resistanceValue;
 
-	public InputField voltageField;
+
 	public InputField resistanceField;
+
+
 
 	public void Start () {
 
-		voltageField.text = "Enter Voltage Here...";
-		resistanceField.text = "Enter Resistance Here...";
+
+		resistanceField.ActivateInputField ();
 	
+	}
+	public void Update(){
+		resistanceField.ActivateInputField ();
 	}
 
 	public void GetInput(){
-
-
-
-				voltageValue = voltageField.text;
-				int.Parse (voltageValue);
-			
-
-			
-				resistanceValue = resistanceField.text;
-				int.Parse (resistanceValue);
 		
-	}
+		string objectName;
+
+		objectName = element.name;
+			
+		if(objectName =="Battery(Clone)"){
+			voltageValue = resistanceField.text;
+			int.Parse (voltageValue);
+		}
+
+		if (objectName == "Resistance(Clone)") {
+			resistanceValue = resistanceField.text;
+			int.Parse (resistanceValue);
+		} else {
+			
+			Start();
+		
+		}
+		}
+			
+			
+				
+		
+
 
 
 }
