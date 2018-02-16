@@ -999,10 +999,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73de5521856c04dfaa4c0b16fb9b5371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vol: {fileID: 0}
+  res: {fileID: 0}
   element: {fileID: 0}
   voltageValue: 
   resistanceValue: 
-  resistanceField: {fileID: 2066248558}
+  valueField: {fileID: 2066248558}
 --- !u!4 &488334116
 Transform:
   m_ObjectHideFlags: 0
