@@ -5,27 +5,36 @@ using UnityEngine.UI;
 
 public class AddValue : MonoBehaviour {
 
-	public GameObject selectedElement;
+
+
+
 
 	public string voltageValue;
-	public string currentValue;
+	public string resistanceValue;
 
 	public InputField voltageField;
-	public InputField currentField;
+	public InputField resistanceField;
 
 	public void Start () {
 
 		voltageField.text = "Enter Voltage Here...";
-		currentField.text = "Enter Current Here...";
+		resistanceField.text = "Enter Resistance Here...";
 	
 	}
 
 	public void GetInput(){
 
-		voltageValue = voltageField.text;
-		currentValue = currentField.text;
-		int.Parse (voltageValue);
-		int.Parse (currentValue);
+
+
+				voltageValue = voltageField.text;
+				int.Parse (voltageValue);
+			
+
+			
+				resistanceValue = resistanceField.text;
+				int.Parse (resistanceValue);
+		
 	}
+
 
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -285,7 +285,7 @@ Prefab:
     - target: {fileID: 224386420825994376, guid: 9ead69d03f8844ab5bde13863c5483b6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -198.56248
       objectReference: {fileID: 0}
     - target: {fileID: 224386420825994376, guid: 9ead69d03f8844ab5bde13863c5483b6,
         type: 2}
@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 488334116}
   - component: {fileID: 488334115}
   m_Layer: 0
-  m_Name: AddControler
+  m_Name: AddController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -998,11 +998,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73de5521856c04dfaa4c0b16fb9b5371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedElement: {fileID: 0}
   voltageValue: 
-  currentValue: 
+  resistanceValue: 
   voltageField: {fileID: 1052047359}
-  currentField: {fileID: 2066248558}
+  resistanceField: {fileID: 2066248558}
 --- !u!4 &488334116
 Transform:
   m_ObjectHideFlags: 0
@@ -1415,7 +1414,7 @@ Prefab:
     - target: {fileID: 224558034457856288, guid: 8107af2627f824a44bfd4d4c39259553,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -850.81244
       objectReference: {fileID: 0}
     - target: {fileID: 224558034457856288, guid: 8107af2627f824a44bfd4d4c39259553,
         type: 2}
@@ -1520,7 +1519,7 @@ Prefab:
     - target: {fileID: 224746241503662160, guid: b9a71b872b45c460198721c4cd9c2015,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -361.62497
       objectReference: {fileID: 0}
     - target: {fileID: 224746241503662160, guid: b9a71b872b45c460198721c4cd9c2015,
         type: 2}
@@ -1665,7 +1664,7 @@ Prefab:
     - target: {fileID: 224200864871432396, guid: 73cbcd53de05644b5a44bb17295e7c4e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -1013.87494
       objectReference: {fileID: 0}
     - target: {fileID: 224200864871432396, guid: 73cbcd53de05644b5a44bb17295e7c4e,
         type: 2}
@@ -2519,7 +2518,7 @@ Prefab:
     - target: {fileID: 224387005721338692, guid: 6dc10efa3b2674d90a4b90578bed954a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -524.68744
       objectReference: {fileID: 0}
     - target: {fileID: 224387005721338692, guid: 6dc10efa3b2674d90a4b90578bed954a,
         type: 2}
@@ -3001,7 +3000,7 @@ Prefab:
     - target: {fileID: 224730759520449226, guid: 2b2b765723cee694d92320c1a0cedaeb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -1176.9374
       objectReference: {fileID: 0}
     - target: {fileID: 224730759520449226, guid: 2b2b765723cee694d92320c1a0cedaeb,
         type: 2}
@@ -3106,7 +3105,7 @@ Prefab:
     - target: {fileID: 224605788112173152, guid: fc92b46d7b8144620b5590a3a8c692af,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -687.74994
       objectReference: {fileID: 0}
     - target: {fileID: 224605788112173152, guid: fc92b46d7b8144620b5590a3a8c692af,
         type: 2}
@@ -3316,7 +3315,7 @@ GameObject:
   - component: {fileID: 2066248559}
   - component: {fileID: 2066248558}
   m_Layer: 5
-  m_Name: Current
+  m_Name: Resistance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
