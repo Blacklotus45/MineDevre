@@ -29,6 +29,7 @@ public class ActionMenu : MonoBehaviour {
 
     public void OnClick(string actionName)
     {
+        /*
         switch (actionName)
         {
             case "Move":
@@ -38,10 +39,11 @@ public class ActionMenu : MonoBehaviour {
                 deleteObject();
                 break;
         }
+        */
     }
 
 	//Working
-    public void deleteObject()
+    public void DeleteObject()
     {
         Destroy(selectedElement);
         print("Object is destroyed");
@@ -49,7 +51,7 @@ public class ActionMenu : MonoBehaviour {
     }
 
 	//Wip
-	public void splitObject()
+	public void SplitObject()
 	{
 		edges = selectedElement.GetComponentsInChildren<GameObject> ();
 		print ("Edges:\n");
@@ -57,8 +59,13 @@ public class ActionMenu : MonoBehaviour {
 	}
 
 
-    private void moveObject()
+    private void MoveObject()
     {
 
+    }
+
+    public void SetVisible(bool b)
+    {
+        gameObject.SetActive(b);
     }
 }

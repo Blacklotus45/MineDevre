@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class ObjectClicker : MonoBehaviour {
 
-	public AddValue av;
+	private AddValue av;
+    private ActionMenu actionMenu;
 
+    //public GameObject actionPanelGameObject;
 
-
-    public GameObject actionPanel;
-
-    public ActionMenu actionMenuScript;
 
     void Start()
     {
-        actionMenuScript = GameObject.Find("Action Panel").GetComponent<ActionMenu>();
-		av = GameObject.Find("AddController").GetComponent<AddValue>();
+        actionMenu = GameObject.Find("Action Panel").GetComponent<ActionMenu>();
+        actionMenu.SetVisible(false);
+        av = GameObject.Find("AddController").GetComponent<AddValue>();
     }
 
     // Update is called once per frame
@@ -35,18 +34,15 @@ public class ObjectClicker : MonoBehaviour {
 					//done for connector object, more efficient structure maybe used here
 					if (hit.transform.parent == null)
 					{
-						actionMenuScript.selectedElement = hit.transform.gameObject;	
+						actionMenu.selectedElement = hit.transform.gameObject;	
 					}
 					else
 					{
-						actionMenuScript.selectedElement = hit.transform.parent.gameObject;
-
+						actionMenu.selectedElement = hit.transform.parent.gameObject;
 						av.element = hit.transform.parent.gameObject;
 
 					}
-//                    PrintName(hit.transform.parent.gameObject);
-                    actionPanel.SetActive(true);
-
+                    actionMenu.SetVisible(true);
                 }
             }
             else
