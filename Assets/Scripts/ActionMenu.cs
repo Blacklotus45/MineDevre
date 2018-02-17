@@ -64,6 +64,16 @@ public class ActionMenu : MonoBehaviour {
                 valueField.text = circuitElement.temporaryResistance + "";
                 break;
 
+                //temp
+            case "Wire":
+                valueField.text = circuitElement.temporaryResistance + "";
+                break;
+
+                //temp
+            case "Switch":
+                valueField.text = circuitElement.temporaryResistance + "";
+                break;
+
             default:
                 break;
 
