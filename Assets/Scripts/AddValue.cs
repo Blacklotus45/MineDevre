@@ -24,8 +24,8 @@ public class AddValue : MonoBehaviour {
 
 
 		valueField.ActivateInputField ();
-		vol = GameObject.Find("Battery_UI").GetComponent<Voltage>();
-		res = GameObject.Find("Resistance_UI").GetComponent<ResistanceValue>();
+		vol = GameObject.Find("Battery").GetComponent<Voltage>();
+		res = GameObject.Find("Resistance").GetComponent<ResistanceValue>();
 	}
 	public void Update(){
 		valueField.ActivateInputField ();

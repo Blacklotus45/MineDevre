@@ -74,6 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4428244946533188}
   - component: {fileID: 114842341815097832}
+  - component: {fileID: 114934619601251924}
   m_Layer: 0
   m_Name: Battery
   m_TagString: Untagged
@@ -199,6 +200,18 @@ MonoBehaviour:
   isChecked: 0
   rightSide: {fileID: 0}
   leftSide: {fileID: 0}
+--- !u!114 &114934619601251924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996434013891820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd8c9a7b815c8492ab7e9098c7aceb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voltage: 0
 --- !u!135 &135056200065052816
 SphereCollider:
   m_ObjectHideFlags: 1
