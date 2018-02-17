@@ -7,6 +7,7 @@ public class ObjectClicker : MonoBehaviour {
 	private AddValue av;
     private ActionMenu actionMenu;
 
+
     //public GameObject actionPanelGameObject;
 
 
@@ -39,7 +40,9 @@ public class ObjectClicker : MonoBehaviour {
 					else
 					{
 						actionMenu.selectedElement = hit.transform.parent.gameObject;
-						av.element = hit.transform.parent.gameObject;
+                        actionMenu.updateActionPanelValuesAndLocation();
+
+                        av.element = hit.transform.parent.gameObject;
 
 					}
                     actionMenu.SetVisible(true);

@@ -15,6 +15,10 @@ public class CircuitElement : MonoBehaviour {
 		Connector
     }
 
+    // Temporary vars
+    public int temporaryVal;
+
+
 	public ElementType typeOfItem;
 	public bool isLocked = false;
 	public bool isChecked = false;

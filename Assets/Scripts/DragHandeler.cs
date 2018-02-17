@@ -17,6 +17,9 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 		Connector
     }
 
+    //Trying to give id to elements
+    static int id = 0; 
+
 	static public DragHandeler draggedItem;
     static public GameObject icon;
     static public GameObject[] CircuitElements;
@@ -80,7 +83,9 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 					break;
 				case ElementType.Resistance:
 					go = Instantiate(ElementList.TheList.RcElements[1]);
-					break;
+                    go.name = "Resistance " + id;
+                    id++;
+                    break;
 				case ElementType.Battery:
 					go = Instantiate(ElementList.TheList.RcElements[2]);
 					break;
