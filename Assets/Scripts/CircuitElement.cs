@@ -16,7 +16,8 @@ public class CircuitElement : MonoBehaviour {
     }
 
     // Temporary vars
-    public int temporaryVal;
+    public int temporaryResistance;
+    public int temporaryVoltage;
 
 
 	public ElementType typeOfItem;

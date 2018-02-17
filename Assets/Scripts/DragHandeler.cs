@@ -88,7 +88,9 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                     break;
 				case ElementType.Battery:
 					go = Instantiate(ElementList.TheList.RcElements[2]);
-					break;
+                    go.name = "Battery " + id;
+                    id++;
+                    break;
 				case ElementType.Switch:
 					go = Instantiate(ElementList.TheList.RcElements[3]);
 					break;

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4230589767022740}
   - component: {fileID: 114593212569607636}
+  - component: {fileID: 65759551716912800}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -136,6 +137,18 @@ Transform:
   m_Father: {fileID: 4230589767022740}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65759551716912800
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099822012193398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.4, z: 1}
+  m_Center: {x: 0, y: 0.05, z: 1}
 --- !u!65 &65887678987400132
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -182,6 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34aa377e52fbac74496bd3ebcad98f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  temporaryResistance: 0
+  temporaryVoltage: 0
   typeOfItem: 4
   isLocked: 0
   isChecked: 0

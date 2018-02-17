@@ -75,6 +75,8 @@ GameObject:
   - component: {fileID: 4428244946533188}
   - component: {fileID: 114842341815097832}
   - component: {fileID: 114934619601251924}
+  - component: {fileID: 114758200327293856}
+  - component: {fileID: 65528293609802252}
   m_Layer: 0
   m_Name: Battery
   m_TagString: Untagged
@@ -137,6 +139,18 @@ Transform:
   m_Father: {fileID: 4428244946533188}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65528293609802252
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996434013891820}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.4, z: 1}
+  m_Center: {x: 0, y: 0.05, z: 1}
 --- !u!65 &65840103844662704
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -184,6 +198,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abc5d1f17f69a44ab551880965c504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114758200327293856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996434013891820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5dbff1212a0c5f44bfca98e15444b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temporaryResistance: 0
+  temporaryVoltage: 0
+  typeOfItem: 2
+  isLocked: 0
+  isChecked: 0
+  rightSide: {fileID: 0}
+  leftSide: {fileID: 0}
+  voltageValue: 0
 --- !u!114 &114842341815097832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,6 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34aa377e52fbac74496bd3ebcad98f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  temporaryResistance: 0
+  temporaryVoltage: 0
   typeOfItem: 2
   isLocked: 0
   isChecked: 0

@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4272210145722250}
   - component: {fileID: 114756174860503800}
+  - component: {fileID: 65590126712946724}
   m_Layer: 0
   m_Name: Wire
   m_TagString: Untagged
@@ -138,6 +139,18 @@ Transform:
   m_Father: {fileID: 4272210145722250}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65590126712946724
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1764299096321646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.77, y: 6.04, z: 1}
+  m_Center: {x: 0, y: 0.05, z: 1}
 --- !u!65 &65718631478980388
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -209,8 +222,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34aa377e52fbac74496bd3ebcad98f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  temporaryResistance: 0
+  temporaryVoltage: 0
   typeOfItem: 0
   isLocked: 0
+  isChecked: 0
   rightSide: {fileID: 0}
   leftSide: {fileID: 0}
 --- !u!114 &114954019110975946

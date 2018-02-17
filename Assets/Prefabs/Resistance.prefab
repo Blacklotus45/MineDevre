@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 4317665992674478}
   - component: {fileID: 114698617074825180}
   - component: {fileID: 114811872378254044}
+  - component: {fileID: 65776992637870092}
+  - component: {fileID: 114809594261872208}
   m_Layer: 0
   m_Name: Resistance
   m_TagString: Untagged
@@ -149,6 +151,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.21, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65776992637870092
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1323278506137804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.4, z: 1}
+  m_Center: {x: 0, y: 0.05, z: 1}
 --- !u!114 &114274446461554872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,6 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34aa377e52fbac74496bd3ebcad98f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  temporaryResistance: 0
+  temporaryVoltage: 0
   typeOfItem: 1
   isLocked: 0
   isChecked: 0
@@ -200,6 +216,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftEdge: 1
+--- !u!114 &114809594261872208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1323278506137804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1e132a0f11df345ba81e3e81037ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temporaryResistance: 0
+  temporaryVoltage: 0
+  typeOfItem: 0
+  isLocked: 0
+  isChecked: 0
+  rightSide: {fileID: 0}
+  leftSide: {fileID: 0}
+  ohmValue: 0
 --- !u!114 &114811872378254044
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -50,16 +50,10 @@ public class ObjectClicker : MonoBehaviour {
             }
             else
             {
-                //actionPanel.SetActive(false);
+                actionMenu.SetVisible(false);
             }
         }
     }
-
-    private void PrintName(GameObject go)
-    {
-        print(go.name);
-    }
-
 
 
 

@@ -47,13 +47,29 @@ public class ActionMenu : MonoBehaviour {
 
 
         circuitElement = GameObject.Find(selectedElement.name).GetComponent<CircuitElement>();
+        //valueField.text = circuitElement.temporaryVal + "";
 
-        //print("HI");
-        //print(circuitElement);
-        //print("2nd HI");
-        valueField.text = circuitElement.temporaryVal + "";
+        string type = circuitElement.typeOfItem.ToString();
+        switch (type)
+        {
+            case "Resistance":
+                valueField.text = circuitElement.temporaryResistance + "";
+                break;
+
+            case "Battery":
+                valueField.text = circuitElement.temporaryVoltage + "";
+                break;
+
+            case "Lamp":
+                valueField.text = circuitElement.temporaryResistance + "";
+                break;
+
+            default:
+                break;
+
+
+        }
     }
-
 
     // Update is called once per frame
     void Update () {
@@ -109,13 +125,37 @@ public class ActionMenu : MonoBehaviour {
 
     public void SetValueOfGameObject()
     {
-        circuitElement.temporaryVal = int.Parse(valueField.text);
+
+        //((Battery)circuitElement).voltageValue = int.Parse(valueField.text);
+
+        string type = circuitElement.typeOfItem.ToString();
+        switch (type)
+        {
+            case "Resistance":
+                circuitElement.temporaryResistance = int.Parse(valueField.text);
+                break;
+
+            case "Battery":
+                circuitElement.temporaryVoltage = int.Parse(valueField.text);
+                break;
+
+            case "Lamp":
+                circuitElement.temporaryResistance = int.Parse(valueField.text);
+                break;
+
+            default:
+                break;
+
+
+        }
+       
+        //circuitElement.temporaryVal = int.Parse(valueField.text);
     }
 
-    public int getCircuitElementVal()
-    {
-        return circuitElement.temporaryVal;
-    }
+    //public int getCircuitElementVal()
+    //{
+    //    return circuitElement.temporaryVal;
+    //}
 
 
 
