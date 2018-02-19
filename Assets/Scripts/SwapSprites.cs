@@ -34,7 +34,7 @@ public class SwapSprites : MonoBehaviour {
 
 
 		foreach(GameObject temp in objs){
-			if (temp.name == "Battery(Clone)" || temp.name == "Resistance(Clone)" || temp.name == "Lamp(Clone)") {
+			if (temp.name.Contains("Battery") || temp.name.Contains("Resistance") || temp.name.Contains("Lamp")) {
 				Debug.Log (temp.name);
 				sprts = temp.GetComponentsInChildren<SpriteRenderer>();
 
