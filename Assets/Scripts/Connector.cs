@@ -5,9 +5,7 @@ using UnityEngine;
 public class Connector : CircuitElement {
 
 	public LinkedList<CircuitElement> ItemList = new LinkedList<CircuitElement>();
-	public CircuitElement[] connectedParts = new CircuitElement[10];
 
-	private int index = 0;
 
 	void Start()
 	{
@@ -22,13 +20,6 @@ public class Connector : CircuitElement {
 
 		isLocked = true;
 
-
-		//For debug purpose
-		if (index < 10)
-		{
-			connectedParts[index] = connectEle;
-			index++;
-		}
 	}
 
 	public void DisconnectElement (GameObject edge)
@@ -37,7 +28,7 @@ public class Connector : CircuitElement {
 		ItemList.Remove(connectEle);
 		//Disconnect other element
 
-		if (connectedParts.Length == 0)
+		if (ItemList.Count == 0)
 		{
 			isLocked = false;
 		}

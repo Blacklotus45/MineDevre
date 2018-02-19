@@ -22,12 +22,19 @@ public class AddValue : MonoBehaviour {
 
 	public void Start () {
 
-
+		if (valueField == null)
+		{
+			return;
+		}
 		valueField.ActivateInputField ();
 		vol = GameObject.Find("Battery").GetComponent<Voltage>();
 		res = GameObject.Find("Resistance").GetComponent<ResistanceValue>();
 	}
 	public void Update(){
+		if (valueField == null)
+		{
+			return;
+		}
 		valueField.ActivateInputField ();
 	}
 

@@ -19,13 +19,15 @@ public class CircuitElement : MonoBehaviour {
     public int temporaryResistance;
     public int temporaryVoltage;
 
+    public int checkSum = 0;					//Checksum is used for checked connectivity, 1 is for looked in single directipn 2 for both
 
 	public ElementType typeOfItem;
 	public bool isLocked = false;
-	public bool isChecked = false;
 
 	public CircuitElement rightSide = null;
 	public CircuitElement leftSide = null;
+
+	public LinkedList<CircuitElement> nodeAttached = null;
 
 	public void ConnectToLeft(GameObject other)
 	{
@@ -39,7 +41,6 @@ public class CircuitElement : MonoBehaviour {
 		isLocked = true;
 	}
 
-
 	public void DisconnectFromLeft(GameObject other)
 	{
 		leftSide = null;
@@ -48,7 +49,6 @@ public class CircuitElement : MonoBehaviour {
 			isLocked = false;
 		}
 	}
-
 
 	public void DisconnectFromRight(GameObject other)
 	{
@@ -67,27 +67,24 @@ public class CircuitElement : MonoBehaviour {
 		}
 		else
 		{
-			if (rightSide == null || leftSide == null)
+			if (nodeAttached == null)
 			{
-				Debug.LogError("Uncompleted element found, isUnknown() returns false.");
-				return false;
-			}
-			else if (rightSide.isChecked && leftSide.isChecked)
-			{
-				return false;
+				return true;
 			}
 			else
 			{
-				return true;
+				Debug.Log("Already attached to a node! " + name);
+				return false;
 			}
 		}
 	}
 
-	public CircuitElement GetNeighbour ()
+	public CircuitElement[] GetNeighbour ()
 	{
+
 		if (typeOfItem == ElementType.Earthing)
 		{
-			return gameObject.GetComponent<EarthlingNode>().connectedNode;
+			return new CircuitElement[]{gameObject.GetComponent<EarthlingNode>().connectedNode};
 		}
 
 		if (leftSide == null || rightSide == null)
@@ -96,23 +93,24 @@ public class CircuitElement : MonoBehaviour {
 			return null;
 		}
 
-		if (rightSide.isChecked && !leftSide.isChecked)
+		if (rightSide.checkSum > 1 && leftSide.checkSum < 1)
 		{
-			return leftSide;
+			return new CircuitElement[]{leftSide};
 		}
-		else if (!rightSide.isChecked && leftSide.isChecked)
+		else if (rightSide.checkSum < 1 && leftSide.checkSum > 1)
 		{
-			return rightSide;
+			return new CircuitElement[]{rightSide};
 		}
-		else if (!rightSide.isChecked && !leftSide.isChecked)
+		else if (rightSide.checkSum > 1 && leftSide.checkSum > 1)
 		{
-//			Debug.LogError("Access denied from non connected element!");
+			Debug.LogError("Both sides are checked");
 			return null;
 		}
-		else
+		else //this part needs to return both
 		{
-//			Debug.Log("Both elements are checked. Return null");
-			return null;
+			Debug.Log("Both elements not checked");
+			return new CircuitElement[]{rightSide,leftSide};
 		}
 	}
+
 }

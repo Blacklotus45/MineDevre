@@ -33,9 +33,16 @@ public class CircuitTraversal : MonoBehaviour {
 		//BeginTraversal();	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	public void AddToNode (int index, CircuitElement elementToAdd)
+	{
+		LinkedListNode<LinkedList<CircuitElement>> temp = NodeList.First;
+
+		for (int i = 0; i < index; i++)
+		{
+			temp = temp.Next;
+		}
+
+		temp.Value.AddLast(elementToAdd);
 	}
 
 	public void BeginTraversal ()
@@ -53,24 +60,16 @@ public class CircuitTraversal : MonoBehaviour {
 
 			CircuitElement firstNode = earthlings [0].GetComponent<CircuitElement> ();
 
-			/*if (firstNode.connectedNode == null)
-			{
-				Debug.LogError ("Nothing is connected to earthling");
-				return;															//Actually it should be different but implement later
-			}*/
-
-			UnknownElements.AddLast (firstNode);
+			UnknownElements.AddFirst (firstNode);
 
 			while (UnknownElements.Count > 0)
 			{
 				CircuitElement topIterator = UnknownElements.First.Value;
 
-				Debug.Log ("Unknown element's name is " + topIterator.name);
-
 				//If the element is already visited or surrounded
 				if (!topIterator.isUnknown ())
 				{
-					Debug.Log ("Already visited this element");
+					Debug.Log ("Already visited this element" + topIterator.name);
 					UnknownElements.RemoveFirst ();
 					continue;
 				}
@@ -78,6 +77,7 @@ public class CircuitTraversal : MonoBehaviour {
 
 				//Make new Nodal list from current count
 				int nodalID = NodeList.Count;
+				Debug.Log ("Unknown element's name is " + topIterator.name + " and starting node " + nodalID);
 				CurrentTraversalElements = new LinkedList<CircuitElement> ();
 				NodalList = new LinkedList<CircuitElement> ();
 				NodeList.AddLast (NodalList);
@@ -87,21 +87,23 @@ public class CircuitTraversal : MonoBehaviour {
 				while (CurrentTraversalElements.Count > 0)
 				{
 					CircuitElement iterator = CurrentTraversalElements.First.Value;
-					CircuitElement nextItem;
+					CircuitElement[] nextItems;
 
 					bool redirection = false;
 
-					//Did we processed this before?
-					if (iterator.isChecked == true)
+					//Did we processed this before? also this field must be reference checking not bool checking
+					if (iterator.checkSum > 1)
 					{
 						Debug.Log ("I'm already processed " + iterator.name);
-						CurrentTraversalElements.RemoveFirst();
+						CurrentTraversalElements.RemoveFirst ();
 						continue;
 					}
-					//Make it known if it's not parsed
+
+					/*Make it known if it's not parsed
+					iterator.isChecked = true;*/
+					//Obsolete now that we update status at what element they are
+
 					Debug.Log (iterator.name);
-					iterator.isChecked = true;
-					
 
 					//What element are we and what actions should we take
 					switch (iterator.typeOfItem)
@@ -109,79 +111,89 @@ public class CircuitTraversal : MonoBehaviour {
 					case CircuitElement.ElementType.Wire:
 						NodalList.AddLast (iterator);
 						CurrentTraversalElements.RemoveFirst ();
+						iterator.checkSum = 2;
+						iterator.nodeAttached = NodalList;
 						break;
 					case CircuitElement.ElementType.Switch:
 						if (iterator.GetComponent<Switch> ().isClosed)
 						{
 							NodalList.AddLast (iterator);
+							iterator.checkSum = 2;
+							iterator.nodeAttached = NodalList;
 						}
 						else
 						{
-							nextItem = iterator.GetNeighbour ();
-							if (nextItem != null) UnknownElements.AddLast (nextItem);	
+							nextItems = iterator.GetNeighbour ();
+							if (nextItems != null)
+								UnknownElements.AddFirst (nextItems[0]);	
 							redirection = true;
+							iterator.checkSum = 1;
 						}
 						CurrentTraversalElements.RemoveFirst ();
 						break;
 					case CircuitElement.ElementType.Resistance:
 					case CircuitElement.ElementType.Lamp:
-						nextItem = iterator.GetNeighbour ();
-						if (nextItem != null) UnknownElements.AddLast (nextItem);;
+						nextItems = iterator.GetNeighbour ();
+						if (nextItems != null)
+							UnknownElements.AddFirst (nextItems[0]);
 						CurrentTraversalElements.RemoveFirst ();
 						redirection = true;
+						iterator.checkSum = 1;
 						break;
 					case CircuitElement.ElementType.Battery:
-						nextItem = iterator.GetNeighbour ();
-						if (nextItem != null)
+						nextItems = iterator.GetNeighbour ();
+						if (nextItems != null)
 						{
-							UnknownElements.AddLast (nextItem);
+							UnknownElements.AddFirst (nextItems[0]);
 							VoltageSourceList.AddLast (iterator);
 						}
 						CurrentTraversalElements.RemoveFirst ();
 						redirection = true;
+						iterator.checkSum = 1;
 						break;
 					case CircuitElement.ElementType.Earthing:
 						CurrentTraversalElements.RemoveFirst ();
+						iterator.checkSum = 2;
+						iterator.nodeAttached = NodalList;
 						break;
 					}
 
 					//Sometimes we need to stop traversing, battery resistance things
-					if (redirection) continue;
+					if (redirection)
+						continue;
 					
 
 					//What comes next?
-					nextItem = iterator.GetNeighbour ();
-					if (nextItem == null)
+					nextItems = iterator.GetNeighbour ();
+					if (nextItems == null)
 					{
-						Debug.Log ("Abort this operation. Either disconnected edge or already covered element.");
-						break;
-					}
-					else if (nextItem.isChecked)
-					{
-						Debug.Log ("Abort this operation. Already checked element");
+						Debug.Log ("Abort this operation. Either disconnected edge.");
 						break;
 					}
 					else
 					{
-						//If the connected type is multi connector, add the array
-						if (nextItem.typeOfItem == CircuitElement.ElementType.Connector)
+						for (int i = 0; i < nextItems.Length; i++)
 						{
-							Debug.Log("Connector found");
-							nextItem.isChecked = true;
-							LinkedList<CircuitElement> tempList = nextItem.GetComponent<Connector> ().ItemList;
-							foreach (CircuitElement celement in tempList)
+							//If the connected type is multi connector, add the array
+							if (nextItems [i].typeOfItem == CircuitElement.ElementType.Connector)
 							{
-								if (celement != iterator)
+								Debug.Log("Connector found");
+								nextItems[i].checkSum = 2;
+								LinkedList<CircuitElement> tempList = nextItems[i].GetComponent<Connector> ().ItemList;
+								foreach (CircuitElement celement in tempList)
 								{
-									Debug.Log("Added " + celement);
-									CurrentTraversalElements.AddLast (celement);	
+									if (celement != iterator)
+									{
+										Debug.Log("Added " + celement);
+										CurrentTraversalElements.AddFirst (celement);	
+									}
 								}
 							}
-						}
-						//If the conencted type is 2 way add it
-						else 
-						{
-							CurrentTraversalElements.AddLast (nextItem);
+							//If the conencted type is 2 way add it
+							else 
+							{
+								CurrentTraversalElements.AddFirst (nextItems[i]);
+							}
 						}
 					}
 				}

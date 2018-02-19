@@ -45,6 +45,11 @@ public class ActionMenu : MonoBehaviour {
     {
         transform.position = new Vector3((float)(((selectedElement.transform.position.x) + 26.66) / 53.32 * 1024), (((selectedElement.transform.position.y) + 20) / 40 * 768), 0);
 
+		if (valueField == null)
+		{
+			return;
+		}
+
 
         circuitElement = GameObject.Find(selectedElement.name).GetComponent<CircuitElement>();
         //valueField.text = circuitElement.temporaryVal + "";

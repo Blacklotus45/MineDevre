@@ -80,6 +80,8 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         	switch (draggedItem.typeOfItem) {
         		case ElementType.Wire:
         			go = Instantiate(ElementList.TheList.RcElements[0]);
+					go.name = "Wire " + id;
+					id++;
 					break;
 				case ElementType.Resistance:
 					go = Instantiate(ElementList.TheList.RcElements[1]);
@@ -109,14 +111,14 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         			break;
         	}
 
-			go.transform.position = spawnPosition();
+			go.transform.position = spawnPosition(go.transform.position.z);
         }
 		DestroyOnDropped.DestroyedFlag = false;
         draggedItem = null;
         icon = null;
     }
 
-    private Vector3 spawnPosition()
+    private Vector3 spawnPosition(float z)
     {
 		float orthoSize = Camera.main.orthographicSize;
 		float aspectRatio = Camera.main.aspect;
@@ -125,7 +127,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 										/ Camera.main.pixelWidth;
 		float spawnX = Input.mousePosition.x * horizontalUnitperPixel - (orthoSize * aspectRatio);
 		float spawnY = Input.mousePosition.y * verticalUnitperPixel - orthoSize;
-		return new Vector3(spawnX, spawnY, 20f);
+		return new Vector3(spawnX, spawnY, z);
     }
 
 }

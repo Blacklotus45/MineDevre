@@ -6,6 +6,11 @@ public class EarthlingNode : CircuitElement {
 
 	public CircuitElement connectedNode = null;
 
+	void Start ()
+	{
+		checkSum = 1;
+	}
+
 
 	public void ConnectTo(GameObject other)
 	{
@@ -29,21 +34,23 @@ public class EarthlingNode : CircuitElement {
 
 	}
 
-	public bool isUnknown ()
+	new public bool isUnknown ()
 	{
 		if (connectedNode == null)
 		{
 			Debug.Log("Uncompleted element found, isUnknown() returns false.[Earthling]");
 			return false;
 		}
-		else if (connectedNode.isChecked)
-		{
-			return false;
-		}
-		else
+
+		if (nodeAttached == null)
 		{
 			return true;
 		}
+		else
+		{
+			return false;
+		}
 	}
+
 
 }

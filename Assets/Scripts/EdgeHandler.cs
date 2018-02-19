@@ -8,11 +8,13 @@ public class EdgeHandler : MonoBehaviour {
 
 	private Strecth strecthHandler;
 	private SpriteRenderer edgeGFX;
+	private SphereCollider edgeCollider;
 
 	void Start ()
 	{
 		strecthHandler = GetComponent<Strecth>();
 		edgeGFX = GetComponent<SpriteRenderer>();
+		edgeCollider = GetComponent<SphereCollider>();
 	}
 
 	//Working
@@ -31,6 +33,7 @@ public class EdgeHandler : MonoBehaviour {
 			}
 			otherElement.GetComponent<EdgeHandler>().ConnectToParentNonRec(gameObject);
 			edgeGFX.color = Color.red;
+			edgeCollider.enabled = false;
 		}
 		else
 		{
@@ -53,6 +56,7 @@ public class EdgeHandler : MonoBehaviour {
 			  	parent.ConnectToRight (otherElement);
 			}
 			Snap(otherElement.transform.position);
+			edgeCollider.enabled = false;
 		}
 		else
 		{
