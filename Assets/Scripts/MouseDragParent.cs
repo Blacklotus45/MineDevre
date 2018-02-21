@@ -5,6 +5,12 @@ using UnityEngine;
 public class MouseDragParent : MonoBehaviour {
 
 	float distance = 30f;
+    public GameObject actionPanel;
+
+    void Start()
+    {
+        actionPanel = GameObject.Find("Action Panel");
+    }
 
     void OnMouseDrag ()
 	{
@@ -25,6 +31,7 @@ public class MouseDragParent : MonoBehaviour {
 
 //		Debug.Log("MousePosition: " + mousePosition + "\nobjPosition: " + objPosition);
         transform.parent.position = objPosition;
+        actionPanel.transform.position = mousePosition;
 
     }
 }

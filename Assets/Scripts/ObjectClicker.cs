@@ -14,7 +14,7 @@ public class ObjectClicker : MonoBehaviour {
     void Start()
     {
         actionMenu = GameObject.Find("Action Panel").GetComponent<ActionMenu>();
-        actionMenu.SetVisible(false);
+
         av = GameObject.Find("AddController").GetComponent<AddValue>();
     }
 
@@ -40,17 +40,17 @@ public class ObjectClicker : MonoBehaviour {
 					else
 					{
 						actionMenu.selectedElement = hit.transform.parent.gameObject;
-                        actionMenu.updateActionPanelValuesAndLocation();
 
                         av.element = hit.transform.parent.gameObject;
 
 					}
-                    actionMenu.SetVisible(true);
+                    actionMenu.updateActionPanelValuesAndLocation();
+                    //actionMenu.SetVisible(true);
                 }
             }
             else
             {
-                actionMenu.SetVisible(false);
+                actionMenu.SetVisibleOff();
             }
         }
     }
