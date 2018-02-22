@@ -23,16 +23,16 @@ public class AddValue : MonoBehaviour {
 	public void Start () {
 
 
-		valueField.ActivateInputField ();
-		vol = GameObject.Find("Battery").GetComponent<Voltage>();
-		res = GameObject.Find("Resistance").GetComponent<ResistanceValue>();
 	}
 	public void Update(){
 		valueField.ActivateInputField ();
 	}
 
 	public void GetInput(){
-		
+
+		vol = GameObject.Find("Battery").GetComponent<Voltage>();
+		res = GameObject.Find("Resistance").GetComponent<ResistanceValue>();
+
 		string objectName;
 
 		objectName = element.name;
