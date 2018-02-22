@@ -6,10 +6,10 @@ public class CircuitTraversal : MonoBehaviour {
 
 	public static CircuitTraversal instance;
 
-	private LinkedList<CircuitElement> VoltageSourceList = new LinkedList<CircuitElement>();
-	private LinkedList<LinkedList<CircuitElement>> NodeList = new LinkedList<LinkedList<CircuitElement>>();
-	private LinkedList<CircuitElement> NodalList;
+	private LinkedList<float> NodeList = new LinkedList<float>();
 
+	private LinkedList<CircuitElement> VoltageSourceList = new LinkedList<CircuitElement>();
+	private LinkedList<CircuitElement> PassiveList = new LinkedList<CircuitElement>();
 	private LinkedList<CircuitElement> CurrentTraversalElements = new LinkedList<CircuitElement>();
 	private LinkedList<CircuitElement> UnknownElements = new LinkedList<CircuitElement>();
 
@@ -33,18 +33,6 @@ public class CircuitTraversal : MonoBehaviour {
 		//BeginTraversal();	
 	}
 	
-	public void AddToNode (int index, CircuitElement elementToAdd)
-	{
-		LinkedListNode<LinkedList<CircuitElement>> temp = NodeList.First;
-
-		for (int i = 0; i < index; i++)
-		{
-			temp = temp.Next;
-		}
-
-		temp.Value.AddLast(elementToAdd);
-	}
-
 	public void BeginTraversal ()
 	{
 		GameObject[] earthlings = GameObject.FindGameObjectsWithTag ("Earth");
@@ -55,34 +43,28 @@ public class CircuitTraversal : MonoBehaviour {
 		}
 		else if (earthlings.Length == 1)
 		{
-			//single start point
-			//Debug.Log ("One Earthling found");
-
 			CircuitElement firstNode = earthlings [0].GetComponent<CircuitElement> ();
-
 			UnknownElements.AddFirst (firstNode);
 
+			//Runs as long as there is a potential new node
 			while (UnknownElements.Count > 0)
 			{
 				CircuitElement topIterator = UnknownElements.First.Value;
-
 				//If the element is already visited or surrounded
 				if (!topIterator.isUnknown ())
 				{
-					Debug.Log ("Already visited this element" + topIterator.name);
 					UnknownElements.RemoveFirst ();
 					continue;
 				}
 
-
 				//Make new Nodal list from current count
 				int nodalID = NodeList.Count;
+				NodeList.AddLast (-0.0f);
+
 				Debug.Log ("Unknown element's name is " + topIterator.name + " and starting node " + nodalID);
-				CurrentTraversalElements = new LinkedList<CircuitElement> ();
-				NodalList = new LinkedList<CircuitElement> ();
-				NodeList.AddLast (NodalList);
 
 				//Traverse and tag connected elements here
+				CurrentTraversalElements = new LinkedList<CircuitElement> ();
 				CurrentTraversalElements.AddFirst (topIterator);
 				while (CurrentTraversalElements.Count > 0)
 				{
@@ -99,33 +81,29 @@ public class CircuitTraversal : MonoBehaviour {
 						continue;
 					}
 
-					/*Make it known if it's not parsed
-					iterator.isChecked = true;*/
-					//Obsolete now that we update status at what element they are
-
-					Debug.Log (iterator.name);
+					Debug.Log ("I'm " + iterator.name);
 
 					//What element are we and what actions should we take
 					switch (iterator.typeOfItem)
 					{
 					case CircuitElement.ElementType.Wire:
-						NodalList.AddLast (iterator);
-						CurrentTraversalElements.RemoveFirst ();
 						iterator.checkSum = 2;
-						iterator.nodeAttached = NodalList;
+						iterator.nodeId = nodalID;
+						CurrentTraversalElements.RemoveFirst ();
 						break;
 					case CircuitElement.ElementType.Switch:
 						if (iterator.GetComponent<Switch> ().isClosed)
 						{
-							NodalList.AddLast (iterator);
+							//Behavior like a Wire
 							iterator.checkSum = 2;
-							iterator.nodeAttached = NodalList;
+							iterator.nodeId = nodalID;
 						}
 						else
 						{
+							//Behavior like a Node Change element
 							nextItems = iterator.GetNeighbour ();
 							if (nextItems != null)
-								UnknownElements.AddFirst (nextItems[0]);	
+								UnknownElements.AddLast (nextItems[0]);
 							redirection = true;
 							iterator.checkSum = 1;
 						}
@@ -135,26 +113,25 @@ public class CircuitTraversal : MonoBehaviour {
 					case CircuitElement.ElementType.Lamp:
 						nextItems = iterator.GetNeighbour ();
 						if (nextItems != null)
-							UnknownElements.AddFirst (nextItems[0]);
-						CurrentTraversalElements.RemoveFirst ();
+							UnknownElements.AddLast (nextItems[0]);
+						PassiveList.AddLast(iterator);
+						iterator.AttachNodeToActive(nodalID);
 						redirection = true;
-						iterator.checkSum = 1;
+						CurrentTraversalElements.RemoveFirst ();
 						break;
 					case CircuitElement.ElementType.Battery:
 						nextItems = iterator.GetNeighbour ();
 						if (nextItems != null)
-						{
-							UnknownElements.AddFirst (nextItems[0]);
-							VoltageSourceList.AddLast (iterator);
-						}
-						CurrentTraversalElements.RemoveFirst ();
+							UnknownElements.AddLast (nextItems[0]);
+						VoltageSourceList.AddLast (iterator);
+						iterator.AttachNodeToActive(nodalID);
 						redirection = true;
-						iterator.checkSum = 1;
+						CurrentTraversalElements.RemoveFirst ();
 						break;
 					case CircuitElement.ElementType.Earthing:
-						CurrentTraversalElements.RemoveFirst ();
 						iterator.checkSum = 2;
-						iterator.nodeAttached = NodalList;
+						iterator.nodeId = 0;
+						CurrentTraversalElements.RemoveFirst ();
 						break;
 					}
 
@@ -177,17 +154,10 @@ public class CircuitTraversal : MonoBehaviour {
 							//If the connected type is multi connector, add the array
 							if (nextItems [i].typeOfItem == CircuitElement.ElementType.Connector)
 							{
-								Debug.Log("Connector found");
 								nextItems[i].checkSum = 2;
 								LinkedList<CircuitElement> tempList = nextItems[i].GetComponent<Connector> ().ItemList;
 								foreach (CircuitElement celement in tempList)
-								{
-									if (celement != iterator)
-									{
-										Debug.Log("Added " + celement);
-										CurrentTraversalElements.AddFirst (celement);	
-									}
-								}
+									if (celement != iterator) CurrentTraversalElements.AddFirst (celement);	
 							}
 							//If the conencted type is 2 way add it
 							else 
@@ -200,7 +170,9 @@ public class CircuitTraversal : MonoBehaviour {
 
 
 				//After traversed every connected element delete from the unknown
+				Debug.Log("Removed the " + UnknownElements.First.Value.name);
 				UnknownElements.RemoveFirst();
+
 			}
 
 			Debug.Log("Traversal is Finished correctly!!");

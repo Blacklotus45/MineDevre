@@ -27,7 +27,53 @@ public class CircuitElement : MonoBehaviour {
 	public CircuitElement rightSide = null;
 	public CircuitElement leftSide = null;
 
-	public LinkedList<CircuitElement> nodeAttached = null;
+	//For battery fields, rightNode is the pozitive side
+	private int leftNode = -1; 
+	private int rightNode = -1;
+
+	//For wire like features
+	public int nodeId = -1;
+
+	//For battery
+	public void AttachNodeToActive (int nodalIdToAttach)
+	{
+		//Rightside is procesed and leftside is not
+		if (rightSide != null && rightSide.checkSum > 1 && leftSide != null && leftSide.checkSum == 0)
+		{
+			rightNode = nodalIdToAttach;
+			Debug.Log("Pozitive side");
+		}
+		//Leftside is processed and rightSide is not
+		else if (rightSide != null && rightSide.checkSum == 0 && leftSide != null && leftSide.checkSum > 1)
+		{
+			leftNode = nodalIdToAttach;
+			Debug.Log("Negative side");
+		}
+		else
+		{
+			//Leftnode is assigned and it is rightnodes turn
+			if (leftNode != -1 && rightNode == -1)
+			{
+				rightNode = nodalIdToAttach;
+				Debug.Log("Pozitive side");
+			}
+			//Leftnode is not assigned but rightside is assigned
+			else if (leftNode == -1 && rightNode != -1)
+			{
+				leftNode = nodalIdToAttach;
+				Debug.Log("Negative side");
+			}
+			//Error hadnling
+			else
+			{
+				Debug.LogError("Problem occured at battery SideNode assignment!!!");
+				Debug.LogError("RightNode: " + rightNode + " LeftNode: " + leftNode);
+				return;
+			}
+		}
+
+		checkSum++;
+	}
 
 	public void ConnectToLeft(GameObject other)
 	{
@@ -67,13 +113,13 @@ public class CircuitElement : MonoBehaviour {
 		}
 		else
 		{
-			if (nodeAttached == null)
+			if (nodeId == -1)
 			{
 				return true;
 			}
 			else
 			{
-				Debug.Log("Already attached to a node! " + name);
+				Debug.Log("Already attached to a node! " + name + "\nNode ID is " + nodeId);
 				return false;
 			}
 		}
@@ -93,17 +139,16 @@ public class CircuitElement : MonoBehaviour {
 			return null;
 		}
 
-		if (rightSide.checkSum > 1 && leftSide.checkSum < 1)
+		if (rightSide.checkSum > 1 && leftSide.checkSum < 2)
 		{
 			return new CircuitElement[]{leftSide};
 		}
-		else if (rightSide.checkSum < 1 && leftSide.checkSum > 1)
+		else if (rightSide.checkSum < 2 && leftSide.checkSum > 1)
 		{
 			return new CircuitElement[]{rightSide};
 		}
 		else if (rightSide.checkSum > 1 && leftSide.checkSum > 1)
 		{
-			Debug.LogError("Both sides are checked");
 			return null;
 		}
 		else //this part needs to return both

@@ -42,7 +42,7 @@ public class EarthlingNode : CircuitElement {
 			return false;
 		}
 
-		if (nodeAttached == null)
+		if (nodeId == -1)
 		{
 			return true;
 		}
