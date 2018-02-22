@@ -28,8 +28,8 @@ public class CircuitElement : MonoBehaviour {
 	public CircuitElement leftSide = null;
 
 	//For battery fields, rightNode is the pozitive side
-	private int leftNode = -1; 
-	private int rightNode = -1;
+	public int leftNode = -1; 
+	public int rightNode = -1;
 
 	//For wire like features
 	public int nodeId = -1;
