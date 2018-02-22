@@ -15,12 +15,10 @@ public class ActionMenu : MonoBehaviour {
     public InputField valueField;
     bool firstTime = true;
 
-    public Renderer rend;
 
     // Use this for initialization
     void Start () {
-        rend = GetComponent<Renderer>();
-        rend.enabled = true;
+
     }
 
     private void Awake()
@@ -133,7 +131,6 @@ public class ActionMenu : MonoBehaviour {
         //gameObject.SetActive(b);
         transform.position = new Vector3(0, 0, -100000 );
 
-
     }
 
 
@@ -143,6 +140,7 @@ public class ActionMenu : MonoBehaviour {
         //((Battery)circuitElement).voltageValue = int.Parse(valueField.text);
 
         string type = circuitElement.typeOfItem.ToString();
+
         switch (type)
         {
             case "Resistance":

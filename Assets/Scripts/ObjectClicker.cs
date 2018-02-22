@@ -35,16 +35,17 @@ public class ObjectClicker : MonoBehaviour {
 					//done for connector object, more efficient structure maybe used here
 					if (hit.transform.parent == null)
 					{
-						actionMenu.selectedElement = hit.transform.gameObject;	
-					}
-					else
+						actionMenu.selectedElement = hit.transform.gameObject;
+
+                    }
+					else //circuit elements
 					{
 						actionMenu.selectedElement = hit.transform.parent.gameObject;
-
                         av.element = hit.transform.parent.gameObject;
 
-					}
-                    actionMenu.updateActionPanelValuesAndLocation();
+                        actionMenu.updateActionPanelValuesAndLocation();
+
+                    }
                     //actionMenu.SetVisible(true);
                 }
             }
