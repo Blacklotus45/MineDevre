@@ -17,12 +17,6 @@ public class CircuitTraversal : MonoBehaviour {
 	private LinkedList<CircuitElement> CurrentTraversalElements = new LinkedList<CircuitElement>();
 	private LinkedList<CircuitElement> UnknownTraversalElements = new LinkedList<CircuitElement>();
 
-
-	void OnEnable ()
-	{
-		BeginTraversal();
-	}
-
 	// Use this for initialization
 	void Start () {
 		if (instance == null)
@@ -201,19 +195,19 @@ public class CircuitTraversal : MonoBehaviour {
 		m = VoltageSourceList.Count;
 		n = NodeList.Count - 1;				//-1 because we don't compute Node 0
 
-		//Main Matrixes
-		float[,] Amatrix = new float[n+m,n+m];
-		float[,] Xmatrix = new float[n+m,1];
-		float[,] Zmatrix = new float[n+m,1];
+		//Main Matrixes, Left(index 0) dimension is row and Right(index 1) dimension is column
+		float[,] Amatrix = new float[n+m , n+m];
+		float[,] Xmatrix = new float[n+m , 1];
+		float[,] Zmatrix = new float[n+m , 1];
 
 		/*A matrix is created from 4 sub matrixes G,B,C and D with following relation
 		A = | G  B |
 			| C  D |
 		*/
-		float[,] Gmatrix = new float[n,n];
-		float[,] Bmatrix = new float[n,m];
+		float[,] Gmatrix = new float[n , n];
+		float[,] Bmatrix = new float[n , m];
 		float[,] Cmatrix;					//Initialize after Bmatrix with Transpose
-		float[,] Dmatrix = new float[m,m];
+		float[,] Dmatrix = new float[m , m];
 
 		//This Part creates Gmatrix which is created from passive elements and Conductance
 		LinkedListNode<CircuitElement> ite = PassiveList.First;
@@ -253,7 +247,7 @@ public class CircuitTraversal : MonoBehaviour {
 			ite = ite.Next;
 		}
 
-		//This part Creates the Bmatrix from Voltage Soures relation to nodes
+		//This part Creates the Bmatrix from Voltage Sources relation to nodes
 		ite = VoltageSourceList.First;
 		for (int i = 0; i < VoltageSourceList.Count; i++)
 		{
@@ -296,8 +290,80 @@ public class CircuitTraversal : MonoBehaviour {
 		{
 			for (int j = 0; j < m+n; j++) 
 			{
-				
+				if (i >= n)
+				{
+					if (j >= n)
+					{
+						Amatrix[i,j] = Dmatrix[i-n,j-n];
+					}
+					else
+					{
+						Amatrix[i,j] = Cmatrix[i-n,j];
+					}
+				}
+				else
+				{
+					if (j >= n)
+					{
+						Amatrix[i,j] = Bmatrix[i,j-n];
+					}
+					else
+					{
+						Amatrix[i,j] = Gmatrix[i,j];
+					}
+				}
 			}
 		}
+
+		//Amatrix is created at this point
+
+		/*z matrix is created from 2 sub matrixes i and e with following relation
+		z = | i |
+			| e |
+		*/
+		float[,] Imatrix = new float[n , 1];
+		float[,] Ematrix = new float[m , 1];
+
+		//This part Creates the Imatrix from Independent current sources relation to nodes
+		for (int i = 0; i < n; i++)
+		{
+			// but for now we don't have it so set it to 0.0f
+			Imatrix[i,0] = 0.0f;
+		}
+
+		//This part Creates the Ematrix from Voltage Sources
+		ite = VoltageSourceList.First;
+		for (int i = 0; i < m; i++)
+		{
+			Ematrix[i,0] = ite.Value.temporaryVoltage;
+
+			//Next voltage source
+			ite = ite.Next;
+		}
+
+		//This part Initialize Zmatrix from I and E matrix
+		for (int i = 0; i < m+n; i++)
+		{
+			if (i >= n)
+			{
+				Zmatrix[i,0] = Ematrix[i-n , 0];
+			}
+			else
+			{
+				Zmatrix[i,0] = Imatrix[i , 0];
+			}
+		}
+
+		//This part evaluates Xmatrix which have voltage and current values for nodes, x = (A^-1) * z
+		Xmatrix = MatrixOp.MatrixMul(MatrixOp.Transpose(Amatrix) , Zmatrix);
+
+		//Write the calculated voltages to NodeList
+		LinkedListNode<float> iteF = NodeList.First;
+		for (int i = 0; i < n; i++)
+		{
+			iteF.Value = Xmatrix[i,0];
+			iteF = iteF.Next;
+		}
+
 	}
 }
