@@ -97,6 +97,12 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 
 		}
 
+		if(GUI.Button(new Rect(180,150,75,30), "Copy")) {
+
+			GUIUtility.systemCopyBuffer = generalCode;		
+		
+		}
+
 	}
 
 
