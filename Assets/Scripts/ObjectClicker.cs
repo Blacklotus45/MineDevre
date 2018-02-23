@@ -14,7 +14,7 @@ public class ObjectClicker : MonoBehaviour {
     void Start()
     {
         actionMenu = GameObject.Find("Action Panel").GetComponent<ActionMenu>();
-        actionMenu.SetVisible(false);
+
         av = GameObject.Find("AddController").GetComponent<AddValue>();
     }
 
@@ -35,22 +35,23 @@ public class ObjectClicker : MonoBehaviour {
 					//done for connector object, more efficient structure maybe used here
 					if (hit.transform.parent == null)
 					{
-						actionMenu.selectedElement = hit.transform.gameObject;	
-					}
-					else
+						actionMenu.selectedElement = hit.transform.gameObject;
+
+                    }
+					else //circuit elements
 					{
 						actionMenu.selectedElement = hit.transform.parent.gameObject;
-                        actionMenu.updateActionPanelValuesAndLocation();
-
                         av.element = hit.transform.parent.gameObject;
 
-					}
-                    actionMenu.SetVisible(true);
+                        actionMenu.updateActionPanelValuesAndLocation();
+
+                    }
+                    //actionMenu.SetVisible(true);
                 }
             }
             else
             {
-                actionMenu.SetVisible(false);
+                actionMenu.SetVisibleOff();
             }
         }
     }

@@ -18,7 +18,7 @@ public class ActionMenu : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-       
+
     }
 
     private void Awake()
@@ -43,13 +43,7 @@ public class ActionMenu : MonoBehaviour {
 
     public void updateActionPanelValuesAndLocation()
     {
-        transform.position = new Vector3((float)(((selectedElement.transform.position.x) + 26.66) / 53.32 * 1024), (((selectedElement.transform.position.y) + 20) / 40 * 768), 0);
-
-		if (valueField == null)
-		{
-			return;
-		}
-
+        //transform.position = new Vector3((float)(((selectedElement.transform.position.x) + 26.66) / 53.32 * 1024), (((selectedElement.transform.position.y) + 20) / 40 * 768), 0);
 
         circuitElement = GameObject.Find(selectedElement.name).GetComponent<CircuitElement>();
         //valueField.text = circuitElement.temporaryVal + "";
@@ -115,7 +109,7 @@ public class ActionMenu : MonoBehaviour {
     {
         Destroy(selectedElement);
         print("Object is destroyed");
-        gameObject.SetActive(false);
+        SetVisibleOff();
     }
 
 	//Wip
@@ -132,9 +126,11 @@ public class ActionMenu : MonoBehaviour {
 
     }
 
-    public void SetVisible(bool b)
+    public void SetVisibleOff()
     {
-        gameObject.SetActive(b);
+        //gameObject.SetActive(b);
+        transform.position = new Vector3(0, 0, -100000 );
+
     }
 
 
@@ -144,6 +140,7 @@ public class ActionMenu : MonoBehaviour {
         //((Battery)circuitElement).voltageValue = int.Parse(valueField.text);
 
         string type = circuitElement.typeOfItem.ToString();
+
         switch (type)
         {
             case "Resistance":
