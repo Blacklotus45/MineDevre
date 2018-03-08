@@ -64,7 +64,8 @@ public class EdgeHandler : MonoBehaviour {
 		}
 	}
 
-	//Needs testing
+
+	//In progress
 	public void DisconnectFromParent (GameObject otherElement)
 	{
 		CircuitElement parent = gameObject.GetComponentInParent<CircuitElement> ();
@@ -78,16 +79,43 @@ public class EdgeHandler : MonoBehaviour {
 			{
 			  	parent.DisconnectFromRight (otherElement);
 			}
-			Desnap(otherElement.transform.position);
-		}
+            otherElement.GetComponent<EdgeHandler>().ConnectToParentNonRec(gameObject);
+            edgeGFX.color = Color.yellow;
+            edgeCollider.enabled = true;
+        }
 		else
 		{
 			Debug.LogWarning("Found an edge circle with disconnect problem");
 		}
 	}
 
-	//Snaps the position to given position and updates GFX
-	private void Snap (Vector3 snapPosition)
+
+    //In progress
+    public void DisconnectFromParentNonRec(GameObject otherElement)
+    {
+        CircuitElement parent = gameObject.GetComponentInParent<CircuitElement>();
+        if (parent != null)
+        {
+            if (LeftEdge)
+            {
+                parent.DisconnectFromLeft(otherElement);
+            }
+            else
+            {
+                parent.DisconnectFromRight(otherElement);
+            }
+            Desnap(otherElement.transform.position);
+            edgeCollider.enabled = true;
+        }
+        else
+        {
+            Debug.LogWarning("Found an edge circle with disconnect problem");
+        }
+    }
+
+
+    //Snaps the position to given position and updates GFX
+    private void Snap (Vector3 snapPosition)
 	{
 		//transform the location of edge
 		this.transform.position = snapPosition;

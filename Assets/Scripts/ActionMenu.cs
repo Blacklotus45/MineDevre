@@ -9,7 +9,15 @@ public class ActionMenu : MonoBehaviour {
     private CircuitElement circuitElement;
 
 
-	public GameObject[] edges;
+	//public GameObject leftEdge;
+
+    //private EdgeHandler leftEdgeHandler;
+    //private EdgeHandler rightEdgeHandler;
+
+    private EdgeHandler[] edges;
+
+   
+
 
 
     public InputField valueField;
@@ -18,7 +26,7 @@ public class ActionMenu : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+       
     }
 
     private void Awake()
@@ -46,6 +54,10 @@ public class ActionMenu : MonoBehaviour {
         //transform.position = new Vector3((float)(((selectedElement.transform.position.x) + 26.66) / 53.32 * 1024), (((selectedElement.transform.position.y) + 20) / 40 * 768), 0);
 
         circuitElement = GameObject.Find(selectedElement.name).GetComponent<CircuitElement>();
+
+        edges = selectedElement.GetComponentsInChildren<EdgeHandler>();
+
+
         //valueField.text = circuitElement.temporaryVal + "";
 
         string type = circuitElement.typeOfItem.ToString();
@@ -115,8 +127,14 @@ public class ActionMenu : MonoBehaviour {
 	//Wip
 	public void SplitObject()
 	{
-		edges = selectedElement.GetComponentsInChildren<GameObject> ();
-		print ("Edges:\n");
+        //edges = selectedElement.GetComponentsInChildren<GameObject> ();
+
+        print("Edges:\n");
+        print(edges);
+
+        
+        print ("Edges length:\n");
+        print(edges.Length);
 
 	}
 
@@ -131,6 +149,11 @@ public class ActionMenu : MonoBehaviour {
         //gameObject.SetActive(b);
         transform.position = new Vector3(0, 0, -100000 );
 
+    }
+
+    public void SetVisible (Vector3 p)
+    {
+        transform.position = p;
     }
 
 
