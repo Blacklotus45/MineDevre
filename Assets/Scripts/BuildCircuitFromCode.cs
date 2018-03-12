@@ -7,18 +7,43 @@ using UnityEditor;
 
 public class BuildCircuitFromCode : MonoBehaviour {
 	public Button myButton;
-
+	public GameObject resistance_prefab;
+	public GameObject battery_prefab;
+	public GameObject lamb_prefab;
+	public GameObject earthing_prefab;
+	public GameObject switch_prefab;
+	public GameObject wire_prefab;
+	public GameObject connector_prefab;
 	public InputField circuit_code;
 
+	GameObject[] objs;
+
 	string[] allElements;
+	string[] resistance_general;
 	string[] resistance_values;
+	string[] battery_general;
 	string[] battery_values;
-	int lamb_val;
-	int earthing_val;
-	int switch_val;
-	int wire_val;
-	int connector_val;
+
+	string[] lamb_values;
+	string[] lamb_general;
+
+	string[] earthing_values;
+	string[] earthing_general;
+
+	string[] switch_values;
+	string[] switch_general;
+
+	string[] wire_values;
+	string[] wire_general;
+
+	string[] connector_values;
+	string[] connector_general;
+
 	bool checking;
+
+	float x = -1.0f;
+	float y = 0.0f;
+
 
 	void Start () {
 		Button btn = myButton.GetComponent<Button>();
@@ -34,9 +59,15 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			EditorUtility.DisplayDialog("Circuit Building From Code",
 				"Your input is valid as a circuit code. Circuit will be generated " , "OK");
 			fillGeneralVal (circuit_code.text);
+
+			ClearScene ();
+
+			CreateElements ();
+
 		} else {
 			EditorUtility.DisplayDialog("Circuit Building From Code",
 				"Your input is invalid so check it then try again!! " , "OK");
+			
 		}
 			
 	}
@@ -50,44 +81,59 @@ public class BuildCircuitFromCode : MonoBehaviour {
 				count++;
 			}
 			if (!(char.IsDigit (code [i]))) {
-				if (code [i] != '&' && code[i] != '%') {
+				if (code [i] == '&' || code [i] == '%' || code [i] == '|' || code [i] == '!' || code[i] == '.' || code[i] == '-') {
+					
+				
+				} else {
+				
 					valid = false;
-			
-				}	
+				}
 			}
 			
 		}
 		Debug.Log ("Count ---> "+count);
-		if (count != 7)
+		int len = code.Length;
+		if (count != 7 || code[len-1] != '%')
 			valid = false;
 
 		return valid;
 	}
 
 	void fillGeneralVal(string code){
-		lamb_val = 0;
-		earthing_val = 0;
-		switch_val = 0;
-		wire_val = 0;
-		connector_val = 0;
+		
 
 
 		allElements = code.Split ('%');
 
-		resistance_values = allElements [0].Split ('&');
+		if (allElements [0] != "") {
+			resistance_general = allElements [0].Split ('&');
+		}
 
-		battery_values = allElements [1].Split ('&');
+		if (allElements [1] != "") {
+			battery_general = allElements [1].Split ('&');
+		}
 
-		lamb_val = int.Parse (allElements[2]);
+		if(allElements[2] != ""){
+		lamb_general = allElements [2].Split ('&');
+		}
 
-		wire_val = int.Parse (allElements[3]);
+		if (allElements [3] != "") {
+			wire_general = allElements [3].Split ('&');
+		}
 
-		switch_val = int.Parse (allElements[4]);
+		if (allElements [4] != "") {
+			switch_general = allElements [4].Split ('&');
+		}
 
-		connector_val = int.Parse (allElements[5]);
+		if(allElements[5] != ""){
+			connector_general = allElements [5].Split ('&');
+		}
 
-		earthing_val = int.Parse (allElements[6]);
+		if(allElements[6] != ""){
+			earthing_general = allElements [6].Split ('&');
+		}
 
+		/*
 		Debug.Log ("Resistances : ");
 		foreach(string temp in resistance_values){
 			Debug.Log ("VAL:"+temp);
@@ -110,5 +156,139 @@ public class BuildCircuitFromCode : MonoBehaviour {
 		Debug.Log ("****************************");
 		Debug.Log ("Earthing : "+earthing_val);
 		Debug.Log ("****************************");
+		*/
+	}
+
+	void CreateElements(){
+		if(resistance_general[0]!=""){
+			for (int i = 0; i < resistance_general.Length - 1; i++) {
+				resistance_values = resistance_general [i].Split ('|');
+
+				x = float.Parse (resistance_values[1]);
+				y = float.Parse (resistance_values[2]);
+
+				GameObject clone = (GameObject)Instantiate (resistance_prefab, new Vector3 (x, y, 0), Quaternion.identity);
+				clone.name = "Resistance " + i;
+				clone.GetComponent<CircuitElement> ().temporaryResistance = int.Parse (resistance_values[0]);
+			}
+		}
+
+		if(battery_general[0]!=""){
+			for (int i = 0; i < battery_general.Length - 1; i++) {
+				battery_values = battery_general [i].Split ('|');
+
+				x = float.Parse (battery_values[1]);
+				y = float.Parse (battery_values[2]);
+
+				GameObject clone = (GameObject)Instantiate (battery_prefab, new Vector3 (x, y, 0), Quaternion.identity);
+				clone.name = "Battery " + i;
+				clone.GetComponent<CircuitElement> ().temporaryVoltage = int.Parse (battery_values[0]);
+			}
+		}
+
+		if(lamb_general[0]!=""){
+			for (int i = 0; i < lamb_general.Length - 1; i++) {
+				lamb_values = lamb_general [i].Split ('|');
+
+				x = float.Parse (lamb_values[1]);
+				y = float.Parse (lamb_values[2]);
+
+				GameObject clone = (GameObject)Instantiate (lamb_prefab, new Vector3 (x, y, 0), Quaternion.identity);
+				clone.name = "Lamb " + i;
+			}
+		}
+
+		if(wire_general[0]!=""){
+			for (int i = 0; i < wire_general.Length - 1; i++) {
+				wire_values = wire_general [i].Split ('|');
+
+				x = float.Parse (wire_values[1]);
+				y = float.Parse (wire_values[2]);
+
+				GameObject clone = (GameObject)Instantiate (wire_prefab, new Vector3 (x, y, 0), Quaternion.identity);
+				clone.name = "Wire " + i;
+
+			}
+		}
+
+		if(switch_general[0]!=""){
+			for (int i = 0; i < switch_general.Length - 1; i++) {
+				switch_values = switch_general [i].Split ('|');
+
+				x = float.Parse (switch_values[1]);
+				y = float.Parse (switch_values[2]);
+
+				GameObject clone = (GameObject)Instantiate (switch_prefab, new Vector3 (x, y, 0), Quaternion.identity);
+				clone.name = "Switch " + i;
+
+			}
+		}
+
+		if(connector_general[0]!=""){
+			for (int i = 0; i < connector_general.Length - 1; i++) {
+				connector_values = connector_general [i].Split ('|');
+
+				x = float.Parse (connector_values[1]);
+				y = float.Parse (connector_values[2]);
+
+				GameObject clone = (GameObject)Instantiate (connector_prefab, new Vector3 (x, y, 0), Quaternion.identity);
+				clone.name = "Connector " + i;
+
+			}
+		}
+
+		if(earthing_general[0]!=""){
+			for (int i = 0; i < earthing_general.Length - 1; i++) {
+				earthing_values = earthing_general [i].Split ('|');
+
+				x = float.Parse (earthing_values[1]);
+				y = float.Parse (earthing_values[2]);
+
+				GameObject clone = (GameObject)Instantiate (earthing_prefab, new Vector3 (x, y, 0), Quaternion.identity);
+				clone.name = "Earthing " + i;
+
+			}
+		}
+
+
+	}
+
+	void ClearScene(){
+		objs =  UnityEngine.Object.FindObjectsOfType<GameObject>() ;
+		foreach (GameObject element in objs) {
+			
+			if(element.name.Contains("Resistance")  && (!element.name.Contains("UI"))){
+
+				Destroy (element);
+
+
+			}else if(element.name.Contains("Battery") && (!element.name.Contains("UI"))){
+
+				Destroy (element);
+
+			}else if(element.name.Contains("Lamp")  && (!element.name.Contains("UI"))){
+
+				Destroy (element);
+
+
+			}else if(element.name.Contains("Wire")  && (!element.name.Contains("UI"))){
+
+				Destroy (element);
+
+			}else if(element.name.Contains("Switch")  && (!element.name.Contains("UI"))){
+
+				Destroy (element);
+
+			}else if(element.name.Contains("Connector")  && (!element.name.Contains("UI"))){
+
+				Destroy (element);
+
+			}else if(element.name.Contains("Earthing")  && (!element.name.Contains("UI"))){
+
+				Destroy (element);;
+			}
+
+		}
+	
 	}
 }
