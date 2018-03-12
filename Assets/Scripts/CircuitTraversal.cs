@@ -103,7 +103,7 @@ public class CircuitTraversal : MonoBehaviour {
 							if (nextItems != null)
 								UnknownTraversalElements.AddLast (nextItems[0]);
 							redirection = true;
-							iterator.checkSum = 1;
+							iterator.checkSum += 1;
 						}
 						CurrentTraversalElements.RemoveFirst ();
 						break;
@@ -142,7 +142,7 @@ public class CircuitTraversal : MonoBehaviour {
 					nextItems = iterator.GetNeighbour ();
 					if (nextItems == null)
 					{
-						Debug.Log ("Abort this operation. Either disconnected edge.");
+						Debug.Log ("Abort this operation. Disconnected edge.");
 						break;
 					}
 					else
@@ -183,7 +183,6 @@ public class CircuitTraversal : MonoBehaviour {
 
 		CalculateValues();
 	}
-
 
 	/*We have 3 Main Matrix A,x and z which have [Ax = z] relation
 	Our unknown values are located at x matrix, z matrix is given values by user
@@ -254,7 +253,6 @@ public class CircuitTraversal : MonoBehaviour {
 			CircuitElement source = ite.Value;
 			int lef = source.leftNode - 1; 
 			int rig = source.rightNode - 1;
-			int volt = source.temporaryVoltage;
 
 			if (lef > -1 && rig > -1)
 			{
