@@ -10,6 +10,8 @@ TagManager:
   - Earth
   - Anahtar
   - BackGround
+  - Undefined
+  - Edge
   layers:
   - Default
   - TransparentFX

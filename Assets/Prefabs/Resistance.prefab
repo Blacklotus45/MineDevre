@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135543444435978646}
   m_Layer: 0
   m_Name: EdgeRight
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 135404342273451070}
   m_Layer: 0
   m_Name: EdgeLeft
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abc5d1f17f69a44ab551880965c504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionPanel: {fileID: 0}
 --- !u!114 &114698617074825180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,11 +200,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   temporaryResistance: 0
   temporaryVoltage: 0
+  checkSum: 0
   typeOfItem: 1
   isLocked: 0
-  isChecked: 0
   rightSide: {fileID: 0}
   leftSide: {fileID: 0}
+  leftNode: -1
+  rightNode: -1
+  nodeId: -1
 --- !u!114 &114745662433554536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,11 +233,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   temporaryResistance: 0
   temporaryVoltage: 0
+  checkSum: 0
   typeOfItem: 0
   isLocked: 0
-  isChecked: 0
   rightSide: {fileID: 0}
   leftSide: {fileID: 0}
+  leftNode: -1
+  rightNode: -1
+  nodeId: -1
   ohmValue: 0
 --- !u!114 &114811872378254044
 MonoBehaviour:
