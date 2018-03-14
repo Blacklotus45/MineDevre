@@ -36,7 +36,6 @@ public class ObjectClicker : MonoBehaviour {
 					if (hit.transform.parent == null)
 					{
 						actionMenu.selectedElement = hit.transform.gameObject;
-
                     }
 					else //circuit elements
 					{
@@ -44,6 +43,8 @@ public class ObjectClicker : MonoBehaviour {
                         av.element = hit.transform.parent.gameObject;
 
                         actionMenu.updateActionPanelValuesAndLocation();
+                        Vector3 v = Camera.main.WorldToScreenPoint(hit.transform.position);
+                        actionMenu.SetVisible(v);
 
                     }
                     //actionMenu.SetVisible(true);
