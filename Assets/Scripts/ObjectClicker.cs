@@ -30,29 +30,21 @@ public class ObjectClicker : MonoBehaviour {
 
 			if (Physics.Raycast (ray, out hit, 100.0f))
 			{
-				if (hit.transform != null)
+				//done for connector object, more efficient structure maybe used here
+				if (hit.transform.parent == null)
 				{
-					//done for connector object, more efficient structure maybe used here
-					if (hit.transform.parent == null)
-					{
-						actionMenu.selectedElement = hit.transform.gameObject;
-                    }
-					else //circuit elements
-					{
-						actionMenu.selectedElement = hit.transform.parent.gameObject;
-                        av.element = hit.transform.parent.gameObject;
-
-                        actionMenu.updateActionPanelValuesAndLocation();
-                        Vector3 v = Camera.main.WorldToScreenPoint(hit.transform.position);
-                        actionMenu.SetVisible(v);
-
-                    }
-                    //actionMenu.SetVisible(true);
+					actionMenu.selectedElement = hit.transform.gameObject;
                 }
-            }
-            else
-            {
-                actionMenu.SetVisibleOff();
+				else //circuit elements
+				{
+					actionMenu.selectedElement = hit.transform.parent.gameObject;
+                    av.element = hit.transform.parent.gameObject;
+
+                    actionMenu.updateActionPanelValuesAndLocation();
+                    Vector3 v = Camera.main.WorldToScreenPoint(hit.transform.position);
+                    actionMenu.SetVisible(v);
+
+                }
             }
         }
     }

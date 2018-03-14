@@ -10,15 +10,10 @@ public class ActionMenu : MonoBehaviour {
 
 
 	//public GameObject leftEdge;
-
     //private EdgeHandler leftEdgeHandler;
     //private EdgeHandler rightEdgeHandler;
 
     private EdgeHandler[] edges;
-
-   
-
-
 
     public InputField valueField;
     bool firstTime = true;
@@ -32,6 +27,15 @@ public class ActionMenu : MonoBehaviour {
     private void Awake()
     {
     
+    }
+
+	// Update is called once per frame
+    void Update () {
+        /* if (selectedElement != null)
+        {
+            gameObject.transform.position = selectedElement.transform.position;
+
+        } */
     }
 
     void OnEnable()
@@ -53,10 +57,15 @@ public class ActionMenu : MonoBehaviour {
     {
         //transform.position = new Vector3((float)(((selectedElement.transform.position.x) + 26.66) / 53.32 * 1024), (((selectedElement.transform.position.y) + 20) / 40 * 768), 0);
 
-        circuitElement = GameObject.Find(selectedElement.name).GetComponent<CircuitElement>();
+		if (selectedElement == null)
+		{
+			Debug.LogWarning("No gameObject is selected in update action menu script");
+			return;
+		}
 
+		//There is a Logic problem here
+		circuitElement = GameObject.Find(selectedElement.name).GetComponent<CircuitElement>();
         edges = selectedElement.GetComponentsInChildren<EdgeHandler>();
-
 
         //valueField.text = circuitElement.temporaryVal + "";
 
@@ -87,18 +96,7 @@ public class ActionMenu : MonoBehaviour {
 
             default:
                 break;
-
-
         }
-    }
-
-    // Update is called once per frame
-    void Update () {
-        /* if (selectedElement != null)
-        {
-            gameObject.transform.position = selectedElement.transform.position;
-
-        } */
     }
 
     public void OnClick(string actionName)
@@ -156,7 +154,6 @@ public class ActionMenu : MonoBehaviour {
         transform.position = p;
     }
 
-
     public void SetValueOfGameObject()
     {
 
@@ -176,9 +173,11 @@ public class ActionMenu : MonoBehaviour {
 
             case "Lamp":
                 circuitElement.temporaryResistance = int.Parse(valueField.text);
+				Debug.LogError("lamp hit");
                 break;
 
             default:
+            	Debug.LogError("Not a circuit element");
                 break;
 
 
