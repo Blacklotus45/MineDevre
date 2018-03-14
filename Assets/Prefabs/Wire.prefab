@@ -161,7 +161,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Size: {x: 1, y: 3.5, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114235858839765456
 MonoBehaviour:
@@ -224,11 +224,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   temporaryResistance: 0
   temporaryVoltage: 0
+  checkSum: 0
   typeOfItem: 0
   isLocked: 0
-  isChecked: 0
   rightSide: {fileID: 0}
   leftSide: {fileID: 0}
+  leftNode: -1
+  rightNode: -1
+  nodeId: -1
 --- !u!114 &114954019110975946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abc5d1f17f69a44ab551880965c504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionPanel: {fileID: 0}
 --- !u!135 &135046831513983778
 SphereCollider:
   m_ObjectHideFlags: 1

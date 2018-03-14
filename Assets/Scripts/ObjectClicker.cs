@@ -24,12 +24,18 @@ public class ObjectClicker : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown (0))
 		{
-          
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 			if (Physics.Raycast (ray, out hit, 100.0f))
 			{
+				//If edge case don't show action Menu
+				if (hit.transform.tag == "Edge")
+				{
+					actionMenu.SetVisibleOff();
+					return;
+				}
+
 				//done for connector object, more efficient structure maybe used here
 				if (hit.transform.parent == null)
 				{

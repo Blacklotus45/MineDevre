@@ -30,6 +30,16 @@ public class CircuitTraversal : MonoBehaviour {
 
 		//BeginTraversal();	
 	}
+
+	public float GetNodeAt (int index)
+	{
+		LinkedListNode<float> tempNode = NodeList.First;
+		for (int i = 0; i < index-1; i++)
+		{
+			tempNode = tempNode.Next;
+		}
+		return tempNode.Value;
+	}
 	
 	public void BeginTraversal ()
 	{

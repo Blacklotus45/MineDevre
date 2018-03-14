@@ -74,24 +74,41 @@ public class ActionMenu : MonoBehaviour {
         {
             case "Resistance":
                 valueField.text = circuitElement.temporaryResistance + "";
+				valueField.interactable = true;
                 break;
 
             case "Battery":
                 valueField.text = circuitElement.temporaryVoltage + "";
+				valueField.interactable = true;
                 break;
 
             case "Lamp":
                 valueField.text = circuitElement.temporaryResistance + "";
+				valueField.interactable = true;
                 break;
 
                 //temp
             case "Wire":
-                valueField.text = circuitElement.temporaryResistance + "";
+	            int nodeID = circuitElement.nodeId;
+				if (nodeID == -1)
+				{
+					valueField.text = "N/A";
+				}
+				else if (nodeID == 0)
+				{
+					valueField.text = "0";
+				}
+				else
+				{
+					valueField.text =  CircuitTraversal.instance.GetNodeAt(nodeID) + "";
+				}
+                valueField.interactable = false;
                 break;
 
                 //temp
             case "Switch":
                 valueField.text = circuitElement.temporaryResistance + "";
+				valueField.interactable = false;
                 break;
 
             default:
@@ -173,7 +190,6 @@ public class ActionMenu : MonoBehaviour {
 
             case "Lamp":
                 circuitElement.temporaryResistance = int.Parse(valueField.text);
-				Debug.LogError("lamp hit");
                 break;
 
             default:
