@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 135046831513983778}
   m_Layer: 0
   m_Name: EdgeLeft
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 135711462051632982}
   m_Layer: 0
   m_Name: EdgeRight
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

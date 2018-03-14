@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135744171249157726}
   m_Layer: 0
   m_Name: EdgeRight
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 135239214124433172}
   m_Layer: 0
   m_Name: EdgeLeft
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abc5d1f17f69a44ab551880965c504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionPanel: {fileID: 0}
 --- !u!114 &114093829877807468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,11 +199,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   temporaryResistance: 0
   temporaryVoltage: 0
+  checkSum: 0
   typeOfItem: 3
   isLocked: 0
-  isChecked: 0
   rightSide: {fileID: 0}
   leftSide: {fileID: 0}
+  leftNode: -1
+  rightNode: -1
+  nodeId: -1
   isClosed: 1
 --- !u!114 &114512479885995012
 MonoBehaviour:
