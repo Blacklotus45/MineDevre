@@ -41,13 +41,13 @@ public class CircuitElement : MonoBehaviour {
 		if (rightSide != null && rightSide.checkSum > 1 && leftSide != null && leftSide.checkSum == 0)
 		{
 			rightNode = nodalIdToAttach;
-			Debug.Log("Pozitive side");
+//			Debug.Log("Pozitive side " + name);
 		}
 		//Leftside is processed and rightSide is not
 		else if (rightSide != null && rightSide.checkSum == 0 && leftSide != null && leftSide.checkSum > 1)
 		{
 			leftNode = nodalIdToAttach;
-			Debug.Log("Negative side");
+//			Debug.Log("Negative side " + name);
 		}
 		else
 		{
@@ -55,13 +55,13 @@ public class CircuitElement : MonoBehaviour {
 			if (leftNode != -1 && rightNode == -1)
 			{
 				rightNode = nodalIdToAttach;
-				Debug.Log("Pozitive side");
+//				Debug.Log("Pozitive side " + name);
 			}
 			//Leftnode is not assigned but rightside is assigned
 			else if (leftNode == -1 && rightNode != -1)
 			{
 				leftNode = nodalIdToAttach;
-				Debug.Log("Negative side");
+//				Debug.Log("Negative side " + name);
 			}
 			//Error hadnling
 			else
@@ -119,7 +119,7 @@ public class CircuitElement : MonoBehaviour {
 			}
 			else
 			{
-				Debug.Log("Already attached to a node! " + name + "\nNode ID is " + nodeId);
+//				Debug.Log("Already attached to a node! " + name + "\nNode ID is " + nodeId);
 				return false;
 			}
 		}
@@ -153,7 +153,7 @@ public class CircuitElement : MonoBehaviour {
 		}
 		else //this part needs to return both
 		{
-			Debug.Log("Both elements not checked");
+//			Debug.Log("Both elements not checked");
 			return new CircuitElement[]{rightSide,leftSide};
 		}
 	}

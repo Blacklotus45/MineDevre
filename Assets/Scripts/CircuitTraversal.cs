@@ -69,7 +69,7 @@ public class CircuitTraversal : MonoBehaviour {
 				int nodalID = NodeList.Count;
 				NodeList.AddLast (-0.0f);
 
-				Debug.Log ("Unknown element's name is " + topIterator.name + " and starting node " + nodalID);
+				//Debug.Log ("Unknown element's name is " + topIterator.name + " and starting node " + nodalID);
 
 				//Traverse and tag connected elements here
 				CurrentTraversalElements = new LinkedList<CircuitElement> ();
@@ -89,7 +89,7 @@ public class CircuitTraversal : MonoBehaviour {
 						continue;
 					}
 
-					Debug.Log ("I'm " + iterator.name);
+					//Debug.Log ("I'm " + iterator.name);
 
 					//What element are we and what actions should we take
 					switch (iterator.typeOfItem)
@@ -119,20 +119,22 @@ public class CircuitTraversal : MonoBehaviour {
 						break;
 					case CircuitElement.ElementType.Resistance:
 					case CircuitElement.ElementType.Lamp:
+						iterator.AttachNodeToActive(nodalID);
 						nextItems = iterator.GetNeighbour ();
 						if (nextItems != null)
 							UnknownTraversalElements.AddLast (nextItems[0]);
-						PassiveList.AddLast(iterator);
-						iterator.AttachNodeToActive(nodalID);
+						if (iterator.checkSum == 1)
+							PassiveList.AddLast(iterator);
 						redirection = true;
 						CurrentTraversalElements.RemoveFirst ();
 						break;
 					case CircuitElement.ElementType.Battery:
+						iterator.AttachNodeToActive(nodalID);
 						nextItems = iterator.GetNeighbour ();
 						if (nextItems != null)
 							UnknownTraversalElements.AddLast (nextItems[0]);
-						VoltageSourceList.AddLast (iterator);
-						iterator.AttachNodeToActive(nodalID);
+						if (iterator.checkSum == 1)
+							VoltageSourceList.AddLast (iterator);
 						redirection = true;
 						CurrentTraversalElements.RemoveFirst ();
 						break;
@@ -152,7 +154,7 @@ public class CircuitTraversal : MonoBehaviour {
 					nextItems = iterator.GetNeighbour ();
 					if (nextItems == null)
 					{
-						Debug.Log ("Abort this operation. Disconnected edge.");
+						Debug.Log ("Abort this operation. Disconnected edge. " + iterator.name );
 						break;
 					}
 					else
@@ -178,7 +180,7 @@ public class CircuitTraversal : MonoBehaviour {
 
 
 				//After traversed every connected element delete from the unknown
-				Debug.Log("Removed the " + UnknownTraversalElements.First.Value.name);
+				//Debug.Log("Removed the " + UnknownTraversalElements.First.Value.name);
 				UnknownTraversalElements.RemoveFirst();
 
 			}
@@ -203,6 +205,7 @@ public class CircuitTraversal : MonoBehaviour {
 		int m,n;
 		m = VoltageSourceList.Count;
 		n = NodeList.Count - 1;				//-1 because we don't compute Node 0
+		Debug.Log("M-N is " + m + "-" + n);
 
 		//Main Matrixes, Left(index 0) dimension is row and Right(index 1) dimension is column
 		float[,] Amatrix = new float[n+m , n+m];
@@ -226,6 +229,8 @@ public class CircuitTraversal : MonoBehaviour {
 			int lef = ele.leftNode - 1; 
 			int rig = ele.rightNode - 1;
 			int ohm = ele.temporaryResistance;
+
+			Debug.Log("I'm " + ele.name + ". My left node is " + ele.leftNode + " and my right one " + ele.rightNode);
 
 			if (lef > -1 && rig > -1)
 			{
@@ -324,6 +329,7 @@ public class CircuitTraversal : MonoBehaviour {
 		}
 
 		//Amatrix is created at this point
+		MatrixOp.printMatrix(Amatrix);
 
 		/*z matrix is created from 2 sub matrixes i and e with following relation
 		z = | i |
@@ -362,8 +368,12 @@ public class CircuitTraversal : MonoBehaviour {
 			}
 		}
 
+		//Zmatrix is created at this point
+		MatrixOp.printMatrix(Zmatrix);
+
 		//This part evaluates Xmatrix which have voltage and current values for nodes, x = (A^-1) * z
 		Xmatrix = MatrixOp.MatrixMul(MatrixOp.Transpose(Amatrix) , Zmatrix);
+		MatrixOp.printMatrix(Xmatrix);
 
 		//Write the calculated voltages to NodeList
 		LinkedListNode<float> iteF = NodeList.First;
