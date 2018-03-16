@@ -46,10 +46,13 @@ public class ObjectClicker : MonoBehaviour {
 					actionMenu.selectedElement = hit.transform.parent.gameObject;
                     av.element = hit.transform.parent.gameObject;
 
-                    actionMenu.updateActionPanelValuesAndLocation();
-                    Vector3 v = Camera.main.WorldToScreenPoint(hit.transform.position);
-                    actionMenu.SetVisible(v);
-
+                    string s = hit.transform.gameObject.name;
+                    if (s != "EdgeLeft" && s != "EdgeRight")
+                    {
+                        actionMenu.updateActionPanelValuesAndLocation();
+                        Vector3 v = Camera.main.WorldToScreenPoint(hit.transform.position);
+                        actionMenu.SetVisible(v);
+                    }
                 }
             }
         }
