@@ -205,7 +205,7 @@ public class CircuitTraversal : MonoBehaviour {
 		int m,n;
 		m = VoltageSourceList.Count;
 		n = NodeList.Count - 1;				//-1 because we don't compute Node 0
-		Debug.Log("M-N is " + m + "-" + n);
+//		Debug.Log("M-N is " + m + "-" + n);
 
 		//Main Matrixes, Left(index 0) dimension is row and Right(index 1) dimension is column
 		float[,] Amatrix = new float[n+m , n+m];
@@ -230,7 +230,7 @@ public class CircuitTraversal : MonoBehaviour {
 			int rig = ele.rightNode - 1;
 			int ohm = ele.temporaryResistance;
 
-			Debug.Log("I'm " + ele.name + ". My left node is " + ele.leftNode + " and my right one " + ele.rightNode);
+//			Debug.Log("I'm " + ele.name + ". My left node is " + ele.leftNode + " and my right one " + ele.rightNode);
 
 			if (lef > -1 && rig > -1)
 			{
@@ -329,7 +329,8 @@ public class CircuitTraversal : MonoBehaviour {
 		}
 
 		//Amatrix is created at this point
-		MatrixOp.printMatrix(Amatrix);
+//		Debug.Log("Amatrix");
+//		MatrixOp.printMatrix(Amatrix);
 
 		/*z matrix is created from 2 sub matrixes i and e with following relation
 		z = | i |
@@ -369,11 +370,13 @@ public class CircuitTraversal : MonoBehaviour {
 		}
 
 		//Zmatrix is created at this point
+//		Debug.Log("Zmatrix");
 		MatrixOp.printMatrix(Zmatrix);
 
 		//This part evaluates Xmatrix which have voltage and current values for nodes, x = (A^-1) * z
-		Xmatrix = MatrixOp.MatrixMul(MatrixOp.Transpose(Amatrix) , Zmatrix);
-		MatrixOp.printMatrix(Xmatrix);
+		Xmatrix = MatrixOp.MatrixMul(MatrixOp.Inverse(Amatrix) , Zmatrix);
+//		Debug.Log("Xmatrix");
+//		MatrixOp.printMatrix(Xmatrix);
 
 		//Write the calculated voltages to NodeList
 		LinkedListNode<float> iteF = NodeList.First;

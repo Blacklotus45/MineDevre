@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class MatrixOp : MonoBehaviour {
 
-//	void Start()
-//	{
-//		float[,] test = {{ 1f,2f,3f} , 
-//						{4f,5f,6f}};
-//
-//		printMatrix (test);
-//		test =  MatrixMul(test,Transpose (test));
-//		printMatrix (test);
-//	}
+	/*void Start()
+	{
+		float[,] test = {{3f, 7f, 2f, 0f} , 
+						{2f, 0f, -2f, 1f} ,
+						{0f, 5f, 1f, -1f} ,
+						{3f, 2f, 1f, -1f}};
+
+//		float[,] test = {{3f, 3f, 2f} , 
+//						{2f, 5f, -2f} ,
+//						{-1f, 1f, 1f}};
+
+		printMatrix (test);
+		test =  Inverse(test);
+		printMatrix (test);
+	}*/
 
 
 	public static float[,] Transpose(float[,] matrix)
@@ -62,7 +68,6 @@ public class MatrixOp : MonoBehaviour {
 	{
 		int m = matrix.GetLength(0);
 		int n = matrix.GetLength(1);
-		Debug.Log("This matrix is " + m + "x" + n);
 		string line;
 		string MainMatrix = "";
 
@@ -83,71 +88,149 @@ public class MatrixOp : MonoBehaviour {
 		float[,] inMat = new float[n,m];
 
 		float det = Determinant(matrix);
-
-		for (int i = 0; i < n; i++)
+		Debug.Log("Determinant is " + det);
+		if (det == 0f)
 		{
-			for (int j = 0; j < m; j++) 
-			{
-				if (i == j)
-				{
-					inMat[i , j] = matrix[n - i - 1, m - j - 1];	
-				}
-				else
-				{
-					inMat[i , j] = -1 * matrix[i , j];	
-				}
-			}
+			Debug.Log("Determinant is zero");
+			return null;
 		}
+		det = 1f/det;
+
+		inMat = AdjointMatrix(matrix);
 
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < m; j++) 
 			{
-				inMat[i , j] = det * matrix[i , j];
+				inMat[i,j] *= det;
 			}
 		}
 
 		return inMat;
 	}
 
-	static float Determinant (float[,] matrix)
+	//use diagonal crosses
+	/*static float Determinant (float[,] matrix)
 	{
 		float det = 0f;
 		int n = matrix.GetLength(0);
 		int m = matrix.GetLength(1);
+//		Debug.Log("Inside of determinant ");
+//		printMatrix(matrix);
 
-		if (n < 2 || m < 2)
+		if (n == 2 && m == 2)
 		{
-			Debug.LogError("Matrix is too small returning first element");
-			return matrix[0,0];
+			det = matrix[0,0] * matrix[1,1] - (matrix[0,1] * matrix[1,0]);
+//			Debug.Log("output of determinant " + det);
+			return det;
 		}
-		else if (n == 2 && m == 2)
+
+		//Diagonal sum
+		float subSum = 1f;
+		for (int i = 0; i < n; i++)
 		{
-			//Use standart determinant here
+			for (int j = 0; j < m; j++) 
+			{
+				int normIndex = (i +j) % n;
+				subSum *= matrix[normIndex, j];
+			}
+			det += subSum;
+			subSum = 1f;
 		}
-		else
+
+		//reverse diagonal
+		subSum = -1f;
+		for (int i = n-1; i > -1; i--)
 		{
-			//Call recursion here
+			for (int j = 0; j < m; j++) 
+			{
+				int normIndex = mod(i - j, n);
+				subSum *= matrix[normIndex, j];
+
+			}
+			det += subSum;
+			subSum = -1f;
+		}
+
+//		Debug.Log("output of determinant " + det);
+		return det;
+
+	}*/
+
+	static float Determinant (float[,] matrix)
+	{
+		int n = matrix.GetLength(0);
+		int m = matrix.GetLength(1);
+		float det = 0f;
+
+		if (n == 1 && m == 1)	return matrix[0,0];
+
+		for (int i = 0; i < n; i++)
+		{
+			if (i % 2 == 0)
+			{
+				det += matrix[i,0] * Determinant(SubMatrix(matrix, i,0));
+			}
+			else
+			{
+				det -= matrix[i,0] * Determinant(SubMatrix(matrix, i,0));
+			}
+
 		}
 
 		return det;
-
 	}
 
-	//Test needed
-	static float[,] SubMatrix(float[,] matrix, int xBegin, int xEnd, int yBegin, int yEnd)
+	//Test needed, Excludes are index
+	static float[,] SubMatrix(float[,] matrix, int xExclude, int yExclude)
 	{
-		float[,] subMat = new float[xEnd - xBegin + 1, yEnd - yBegin + 1];
+		int n = matrix.GetLength(0);
+		int m = matrix.GetLength(1);
+		float[,] subMat = new float[n -1, m -1];
 
-		for (int i = xBegin; i < xBegin + xEnd; i++)
+		for (int i = 0; i < n; i++)
 		{
-			for (int j = yBegin; j < yBegin + yEnd; j++) 
+			for (int j = 0; j < m; j++) 
 			{
-				subMat[i - xBegin, j -yBegin] = matrix[i,j];
+				int a = i;
+				int b = j;
+				if (a == xExclude || b == yExclude) continue;
+				if (a > xExclude) a -= 1;
+				if (b > yExclude) b -= 1;
+					
+				subMat[a, b] = matrix[i, j];
 			}
 		}
 
-
+//		printMatrix(subMat);
 		return subMat;
 	}
+
+	static float[,] AdjointMatrix (float[,] matrix)
+	{
+		int n = matrix.GetLength(0);
+		int m = matrix.GetLength(1);
+		float[,] adjMat = new float[n,m];
+
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++) 
+			{
+				adjMat[i,j] = Determinant(SubMatrix(matrix, i, j));
+
+				//checkerboard pattern added
+				if ((i + j) % 2 == 1) adjMat[i,j] *= -1;
+			}
+		}
+
+//		printMatrix(adjMat);
+		adjMat = Transpose(adjMat);
+//		printMatrix(adjMat);
+		return adjMat;
+	}
+
+	static int mod(int x, int m) {
+    	return (x%m + m)%m;
+	}
+
 }
