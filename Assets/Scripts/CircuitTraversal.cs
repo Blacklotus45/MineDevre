@@ -34,6 +34,11 @@ public class CircuitTraversal : MonoBehaviour {
 	public float GetNodeAt (int index)
 	{
 		LinkedListNode<float> tempNode = NodeList.First;
+        if (index == 0)
+        {
+            return 0f;
+        }
+
 		for (int i = 0; i < index-1; i++)
 		{
 			tempNode = tempNode.Next;
@@ -386,5 +391,52 @@ public class CircuitTraversal : MonoBehaviour {
 			iteF = iteF.Next;
 		}
 
-	}
+        CalculateAmper();
+
+    }
+
+    private void CalculateAmper()
+    {
+        foreach (CircuitElement element in PassiveList)
+        {
+            float voltRight = CircuitTraversal.instance.GetNodeAt(element.rightSide.nodeId);
+            float voltLeft = CircuitTraversal.instance.GetNodeAt(element.leftSide.nodeId);
+
+            print("voltRight: " + voltRight);
+            print("voltLeft: " + voltLeft);
+
+            //float voltRight = (float)element.rightSide.temporaryVoltage;
+
+
+            //float voltLeft = (float)element.leftSide.temporaryVoltage;
+
+            float voltDif;
+
+            bool fromLeftToRight;
+
+            if (voltRight > voltLeft)
+            {
+                fromLeftToRight = false;
+                voltDif = voltRight - voltLeft;
+            }
+            else
+            {
+                fromLeftToRight = true;
+                voltDif = voltLeft - voltRight;
+            }
+
+            print( "resistans: " + element.temporaryResistance);
+
+            print("voltDif: " + voltDif);
+
+            float amper = voltDif / element.temporaryResistance;
+
+            print(element.temporaryResistance + " değerli resistans uzerindeki amper: " + amper);
+
+        }
+        
+
+    }
+
+
 }
