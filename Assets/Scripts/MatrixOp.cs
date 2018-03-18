@@ -167,6 +167,8 @@ public class MatrixOp : MonoBehaviour {
 
 		for (int i = 0; i < n; i++)
 		{
+			if (matrix[i,0] == 0)	continue;
+
 			if (i % 2 == 0)
 			{
 				det += matrix[i,0] * Determinant(SubMatrix(matrix, i,0));
