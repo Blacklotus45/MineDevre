@@ -1,8 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class zoomControl : MonoBehaviour {
+
+	public Button btnIn;
+	public Button btnOut;
+
+
+	bool zoomIn=false;
+	bool zoomOut=false;
 
 	public float zoomSize=20;
 
@@ -20,6 +28,8 @@ public class zoomControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+
+
 		//set max camera bounds (assumes camera is max zoom and centered on Start)
 		topRight = GetComponent<Camera>().ScreenToWorldPoint(new Vector3(GetComponent<Camera>().pixelWidth, GetComponent<Camera>().pixelHeight, -transform.position.z));
 		bottomLeft = GetComponent<Camera>().ScreenToWorldPoint(new Vector3(0,0,-transform.position.z));
@@ -27,9 +37,12 @@ public class zoomControl : MonoBehaviour {
 		cameraMaxY = topRight.y;
 		cameraMinX = bottomLeft.x;
 		cameraMinY = bottomLeft.y;
-		
+
+
 	}
-	
+
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -40,24 +53,24 @@ public class zoomControl : MonoBehaviour {
 			transform.Translate(x,y,0);
 		}
 
-		if(Input.GetAxis("Mouse ScrollWheel") > 0){
+		if(zoomIn){
 
 			if(zoomSize > 8){
 
 				zoomSize -= 1;
 
 			}
-
+			zoomIn = false;
 		}
 
-		if(Input.GetAxis("Mouse ScrollWheel") < 0){
+		if(zoomOut){
 
 			if(zoomSize < 20){
 
 				zoomSize += 1;
 
 			}
-
+			zoomOut = false;
 		}
 
 		GetComponent<Camera> ().orthographicSize = zoomSize;
@@ -86,5 +99,13 @@ public class zoomControl : MonoBehaviour {
 			transform.position = new Vector3(transform.position.x, transform.position.y + (cameraMinY - bottomLeft.y), transform.position.z);
 		}
 
+	}
+
+	public void zoomInF(){
+		zoomIn = true;
+	}
+
+	public void zoomOutF(){
+		zoomOut = true;
 	}
 }
