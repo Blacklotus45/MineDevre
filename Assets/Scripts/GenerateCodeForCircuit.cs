@@ -183,7 +183,9 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 			}
 		
 	  }
-
+		if(resistance_code[0] =='e' && (resistance_code.Length != 1)){
+			resistance_code = resistance_code.Substring (0);
+		}
 
 		generalCode = resistance_code + "%" + battery_code + "%"+ lamb_code + "%"  + wire_code + "%" +  switch_code + "%" + connector_code + "%"+ earthing_code + "%";
 		Debug.Log ("General Code : " + generalCode);
@@ -221,7 +223,7 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 
 		if(GUI.Button(new Rect(180,150,75,30), "Copy")) {
 
-			GUIUtility.systemCopyBuffer = generalCode;		
+			UniClipboard.SetText (generalCode);	
 		
 		}
 		if (GUI.Button (new Rect (50, 200, 75, 30), "Save1")) {
