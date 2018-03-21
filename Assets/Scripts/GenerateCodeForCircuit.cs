@@ -183,7 +183,7 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 			}
 		
 	  }
-		if(resistance_code[0] =='e' && (resistance_code.Length != 1)){
+		if(resistance_code[0].Equals('e') && (resistance_code.Length != 1)){
 			resistance_code = resistance_code.Substring (0);
 		}
 
