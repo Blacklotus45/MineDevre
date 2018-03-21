@@ -62,8 +62,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 		Debug.Log ("CHECKıNG : " + checking);
 
 		if (checking) {
-			EditorUtility.DisplayDialog("Circuit Building From Code",
-				"Your input is valid as a circuit code. Circuit will be generated " , "OK");
+			//EditorUtility.DisplayDialog("Circuit Building From Code",
+			//	"Your input is valid as a circuit code. Circuit will be generated " , "OK");
 			fillGeneralVal (circuit_code.text);
 
 			ClearScene ();
@@ -71,8 +71,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			CreateElements ();
 
 		} else {
-			EditorUtility.DisplayDialog("Circuit Building From Code",
-				"Your input is invalid so check it then try again!! " , "OK");
+			//EditorUtility.DisplayDialog("Circuit Building From Code",
+			//	"Your input is invalid so check it then try again!! " , "OK");
 			
 		}
 			
