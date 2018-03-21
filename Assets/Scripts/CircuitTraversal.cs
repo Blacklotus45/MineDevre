@@ -431,6 +431,8 @@ public class CircuitTraversal : MonoBehaviour {
 
             float amper = voltDif / element.temporaryResistance;
 
+            element.amper = amper;
+
             print(element.temporaryResistance + " değerli resistans uzerindeki amper: " + amper);
 
         }
