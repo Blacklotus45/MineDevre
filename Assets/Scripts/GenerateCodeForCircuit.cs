@@ -6,13 +6,13 @@ using System.Security.Cryptography;
 using System.Text;
 
 public class GenerateCodeForCircuit : MonoBehaviour {
+
 	public Button myButton;
 	GameObject top;
 	GameObject[] objs;
 	private bool showPopUp = false;
 	private CircuitElement circuitElement;
 	private CircuitElement circuitElement2;
-
 
 
 	public string generalCode;
@@ -143,9 +143,13 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 			}
 		
 	  }
+
+
 		generalCode = resistance_code + "%" + battery_code + "%"+ lamb_code + "%"  + wire_code + "%" +  switch_code + "%" + connector_code + "%"+ earthing_code + "%";
 		Debug.Log ("General Code : " + generalCode);
 		showPopUp = true;
+
+
 
 
 	
@@ -180,7 +184,22 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 			GUIUtility.systemCopyBuffer = generalCode;		
 		
 		}
+		if (GUI.Button (new Rect (50, 200, 75, 30), "Save1")) {
 
+			SaveSystem.instance.saveCode = generalCode; 
+			SaveSystem.instance.Save (1);
+
+		}
+		if (GUI.Button (new Rect (100, 220, 75, 30), "Save2")) {
+
+			SaveSystem.instance.saveCode = generalCode;
+			SaveSystem.instance.Save (2);
+		}
+		if (GUI.Button (new Rect (150, 240, 75, 30), "Save3")) {
+
+			SaveSystem.instance.saveCode = generalCode;
+			SaveSystem.instance.Save (3);
+		}
 	}
 
 	string getSHA1(string g_code){

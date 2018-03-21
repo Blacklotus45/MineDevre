@@ -50,7 +50,12 @@ public class BuildCircuitFromCode : MonoBehaviour {
 		btn.onClick.AddListener(TaskOnClick);
 	}
 
-	void TaskOnClick(){
+	public void TaskOnClick(string code){
+		circuit_code.text = code;
+		TaskOnClick ();
+	}
+
+	public void TaskOnClick(){
 		Debug.Log ("The code entered : "+circuit_code.text);
 		 checking = inputValidate (circuit_code.text);
 		Debug.Log ("CHECKıNG : " + checking);
