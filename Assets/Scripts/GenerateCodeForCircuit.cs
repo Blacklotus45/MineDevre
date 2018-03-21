@@ -16,13 +16,13 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 
 
 	public string generalCode;
-	string resistance_code = "";
-	string battery_code = "";
-	string lamb_code = "";
-	string earthing_code = "";
-	string switch_code = "";
-	string wire_code = "";
-	string connector_code = "";
+	string resistance_code = "e";
+	string battery_code = "e";
+	string lamb_code = "e";
+	string earthing_code = "e";
+	string switch_code = "e";
+	string wire_code = "e";
+	string connector_code = "e";
 
 	string tempStorage="";
 	double tempX= 0.0f;
@@ -33,6 +33,8 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 	int switch_counter = 0;
 	int wire_counter = 0;
 	int connector_counter = 0;
+	int resistance_counter = 0;
+	int battery_counter = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -41,13 +43,13 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 	}
 	
 	void TaskOnClick(){
-		resistance_code = "";
-		battery_code = "";
-		lamb_code = "";
-		earthing_code = "";
-		switch_code = "";
-		wire_code = "";
-		connector_code = "";
+		resistance_code = "e";
+		battery_code = "e";
+		lamb_code = "e";
+		earthing_code = "e";
+		switch_code = "e";
+		wire_code = "e";
+		connector_code = "e";
 
 
 		lamb_counter = 0;
@@ -55,6 +57,9 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 		switch_counter = 0;
 		wire_counter = 0;
 		connector_counter = 0;
+		resistance_counter = 0;
+		battery_counter = 0;
+
 		top = transform.root.gameObject;
 		Debug.Log (top.name + "!!!!");
 
@@ -66,6 +71,11 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 			tempY = 0.0f;
 			if(element.name.Contains("Resistance")  && (!element.name.Contains("UI"))){
 
+				if (resistance_counter == 0) {
+					resistance_code = "";
+					resistance_counter = resistance_counter +1;
+				}
+				resistance_counter++;
 				circuitElement = element.GetComponent<CircuitElement>();
 				tempStorage = circuitElement.temporaryResistance+"";
 
@@ -78,6 +88,11 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 			
 			}else if(element.name.Contains("Battery") && (!element.name.Contains("UI"))){
 
+				if (battery_counter == 0) {
+					battery_code = "";
+					battery_counter = battery_counter + 1;
+				}
+
 				circuitElement2 = element.GetComponent<CircuitElement>();
 				tempStorage = circuitElement2.temporaryVoltage+"";
 				tempX = System.Math.Round (element.transform.position.x,2);
@@ -87,6 +102,11 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 				battery_code = battery_code + tempStorage+ "&";
 			
 			}else if(element.name.Contains("Lamp")  && (!element.name.Contains("UI"))){
+
+				if (lamb_counter == 0) {
+					lamb_code = "";
+					resistance_counter++;
+				}
 
 				lamb_counter = lamb_counter + 1;
 
@@ -99,6 +119,11 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 
 			}else if(element.name.Contains("Wire")  && (!element.name.Contains("UI"))){
 
+				if (wire_counter == 0) {
+					wire_code = "";
+					wire_counter++;
+				}
+
 				wire_counter = wire_counter + 1;
 
 				tempX = System.Math.Round (element.transform.position.x,2);
@@ -110,6 +135,11 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 
 			}else if(element.name.Contains("Switch")  && (!element.name.Contains("UI"))){
 
+				if (switch_counter == 0) {
+					switch_code = "";
+					switch_counter++;
+				}
+
 				switch_counter = switch_counter + 1;
 
 				tempX = System.Math.Round (element.transform.position.x,2);
@@ -120,6 +150,11 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 				switch_code = switch_code + tempStorage+ "&";
 
 			}else if(element.name.Contains("Connector")  && (!element.name.Contains("UI"))){
+
+				if (connector_counter == 0) {
+					connector_code = "";
+					connector_counter++;
+				}
 				
 				connector_counter = connector_counter + 1;
 
@@ -131,6 +166,11 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 				connector_code = connector_code + tempStorage+ "&";
 
 			}else if(element.name.Contains("Earthing")  && (!element.name.Contains("UI"))){
+
+				if (earthing_counter == 0) {
+					earthing_code = "";
+					earthing_counter++;
+				}
 				
 				earthing_counter = earthing_counter + 1;
 
@@ -161,7 +201,7 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 		if (showPopUp)
 		{
 			GUI.Window(0, new Rect((Screen.width/2)-250, (Screen.height/2)-75
-				, 300, 250), ShowGUI, "Generated Code For Circuit");
+				, 450, 250), ShowGUI, "Generated Code For Circuit");
 
 		}
 	}
@@ -170,10 +210,10 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 	{
 		
 
-		GUI.Label(new Rect(60, 80, 220, 60), "Your Code is (In short form hashed) : "+getSHA1(generalCode));
+		GUI.Label(new Rect(60, 80, 300, 100), "Your Code for this circuit : "+generalCode);
 
 
-		if (GUI.Button(new Rect(50, 150, 75, 30), "OK"))
+		if (GUI.Button(new Rect(60, 150, 75, 30), "OK"))
 		{
 			showPopUp = false;
 

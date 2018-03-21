@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
@@ -86,7 +87,7 @@ public class BuildCircuitFromCode : MonoBehaviour {
 				count++;
 			}
 			if (!(char.IsDigit (code [i]))) {
-				if (code [i] == '&' || code [i] == '%' || code [i] == '|' || code [i] == '!' || code[i] == '.' || code[i] == '-') {
+				if (code [i] == '&' || code [i] == '%' || code [i] == '|' || code [i] == '!' || code[i] == '.' || code[i] == '-' ||code[i] == 'e') {
 					
 				
 				} else {
@@ -110,33 +111,57 @@ public class BuildCircuitFromCode : MonoBehaviour {
 
 		allElements = code.Split ('%');
 
-		if (allElements [0] != "") {
+		//for (int m = 0; m < allElements.Length-1; m++) {
+		//	Debug.Log ("Bütün elementler:  "+m+"-----------------------"+allElements[m]);
+		//}
+
+		if (!(allElements [0].Equals ("e"))) {
 			resistance_general = allElements [0].Split ('&');
+		} else {
+//			resistance_general = s
+			resistance_general = new string[]{"e"};
 		}
 
-		if (allElements [1] != "") {
+		if (!(allElements [1].Equals ("e"))) {
 			battery_general = allElements [1].Split ('&');
+		} else {
+			battery_general = new string[]{"e"};
 		}
 
-		if(allElements[2] != ""){
-		lamb_general = allElements [2].Split ('&');
+
+		if (!(allElements [2].Equals ("e"))) {
+			lamb_general = allElements [2].Split ('&');
+		} else {
+			lamb_general = new string[]{"e"};
 		}
 
-		if (allElements [3] != "") {
+		if (!(allElements [3].Equals ("e"))) {
 			wire_general = allElements [3].Split ('&');
+		} else {
+
+			wire_general = new string[]{"e"};
+		
 		}
 
-		if (allElements [4] != "") {
+		if (!(allElements [4].Equals ("e"))) {
 			switch_general = allElements [4].Split ('&');
+		} else {
+			switch_general = new string[]{"e"};
 		}
 
-		if(allElements[5] != ""){
+		if (!(allElements [5].Equals ("e"))) {
 			connector_general = allElements [5].Split ('&');
+		} else {
+			connector_general = new string[]{"e"};
 		}
 
-		if(allElements[6] != ""){
+		if (!(allElements [6].Equals ("e"))) {
 			earthing_general = allElements [6].Split ('&');
+		} else {
+			earthing_general = new string[]{"e"};
 		}
+
+		//printValues ();
 
 		/*
 		Debug.Log ("Resistances : ");
@@ -165,7 +190,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 	}
 
 	void CreateElements(){
-		if(resistance_general[0]!=""){
+		if(!(resistance_general[0].Equals("e")) ){
+
 			for (int i = 0; i < resistance_general.Length - 1; i++) {
 				resistance_values = resistance_general [i].Split ('|');
 
@@ -178,7 +204,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			}
 		}
 
-		if(battery_general[0]!=""){
+		if(!(battery_general[0].Equals("e"))){
+
 			for (int i = 0; i < battery_general.Length - 1; i++) {
 				battery_values = battery_general [i].Split ('|');
 
@@ -191,7 +218,9 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			}
 		}
 
-		if(lamb_general[0]!=""){
+		if(!(lamb_general[0].Equals("e"))){
+
+
 			for (int i = 0; i < lamb_general.Length - 1; i++) {
 				lamb_values = lamb_general [i].Split ('|');
 
@@ -203,7 +232,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			}
 		}
 
-		if(wire_general[0]!=""){
+		if(!(wire_general[0].Equals("e"))){
+
 			for (int i = 0; i < wire_general.Length - 1; i++) {
 				wire_values = wire_general [i].Split ('|');
 
@@ -216,7 +246,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			}
 		}
 
-		if(switch_general[0]!=""){
+		if(!(switch_general[0].Equals("e"))){
+
 			for (int i = 0; i < switch_general.Length - 1; i++) {
 				switch_values = switch_general [i].Split ('|');
 
@@ -229,7 +260,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			}
 		}
 
-		if(connector_general[0]!=""){
+		if(!(connector_general[0].Equals("e"))){
+
 			for (int i = 0; i < connector_general.Length - 1; i++) {
 				connector_values = connector_general [i].Split ('|');
 
@@ -242,7 +274,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			}
 		}
 
-		if(earthing_general[0]!=""){
+		if(!(earthing_general[0].Equals("e")) ){
+
 			for (int i = 0; i < earthing_general.Length - 1; i++) {
 				earthing_values = earthing_general [i].Split ('|');
 
@@ -295,5 +328,46 @@ public class BuildCircuitFromCode : MonoBehaviour {
 
 		}
 	
+	}
+
+	void printValues(){
+		for (int i = 0; i < resistance_general.Length-1; i++) {
+			Debug.Log ("Resistamce General: "+ resistance_general[i]);
+		}
+
+		Debug.Log ("***************************************");
+		for (int i = 0; i < battery_general.Length-1; i++) {
+			Debug.Log ("Battery General: "+ battery_general[i]);
+		}
+
+
+		Debug.Log ("***************************************");
+		for (int i = 0; i < lamb_general.Length-1; i++) {
+			Debug.Log ("Lamb General: "+ lamb_general[i]);
+		}
+
+
+		Debug.Log ("***************************************");
+		for (int i = 0; i < wire_general.Length-1; i++) {
+			Debug.Log ("Wire General: "+ wire_general[i]);
+		}
+
+		Debug.Log ("***************************************");
+		for (int i = 0; i < switch_general.Length-1; i++) {
+			Debug.Log ("Switch General: "+ switch_general[i]);
+		}
+
+
+
+		Debug.Log ("***************************************");
+		for (int i = 0; i < earthing_general.Length-1; i++) {
+			Debug.Log ("Earthing General: "+ earthing_general[i]);
+		}
+
+
+		Debug.Log ("***************************************");
+		for (int i = 0; i < connector_general.Length-1; i++) {
+			Debug.Log ("Connector General: "+ connector_general[i]);
+		}
 	}
 }
