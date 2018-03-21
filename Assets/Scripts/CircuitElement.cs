@@ -18,6 +18,7 @@ public class CircuitElement : MonoBehaviour {
     // Temporary vars
     public int temporaryResistance;
     public int temporaryVoltage;
+    public float amper;
 
     public int checkSum = 0;					//Checksum is used for checked connectivity, 1 is for looked in single directipn 2 for both
 

@@ -16,9 +16,21 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 		Earthing,
 		Connector
     }
+	SpriteRenderer[] sprts ;
+	SpriteRenderer[] sprtsNew ;
+	Sprite spritePil; 
 
+	Sprite spriteDirenc; 
+
+	Sprite spriteLamba; 
+
+	GameObject[] objs;
     //Trying to give id to elements
     static int id = 0; 
+
+	int foundRes = 0;
+	int foundBattery = 0;
+	int foundLamb = 0;
 
 	static public DragHandeler draggedItem;
     static public GameObject icon;
@@ -77,6 +89,7 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 		if (!DestroyOnDropped.DestroyedFlag)
 		{
         	GameObject go;
+			scanScene ();
         	switch (draggedItem.typeOfItem) {
         		case ElementType.Wire:
         			go = Instantiate(ElementList.TheList.RcElements[0]);
@@ -87,17 +100,42 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 					go = Instantiate(ElementList.TheList.RcElements[1]);
                     go.name = "Resistance " + id;
                     id++;
+					if(foundRes == 1){
+					sprtsNew = go.GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer srNew in sprtsNew ){
+							if (srNew.tag == "Direnc") {
+								srNew.sprite = spriteDirenc;
+							}
+						}
+					}
                     break;
 				case ElementType.Battery:
 					go = Instantiate(ElementList.TheList.RcElements[2]);
                     go.name = "Battery " + id;
                     id++;
-                    break;
+					if(foundBattery == 1){
+					sprtsNew = go.GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer srNew in sprtsNew ){
+							if (srNew.tag == "Pil") {
+								srNew.sprite = spritePil;
+							}
+						}
+					}
+					break;
 				case ElementType.Switch:
 					go = Instantiate(ElementList.TheList.RcElements[3]);
 					break;
 				case ElementType.Lamp:
 					go = Instantiate(ElementList.TheList.RcElements[4]);
+					
+					if(foundLamb == 1){
+					sprtsNew = go.GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer srNew in sprtsNew ){
+						if (srNew.tag == "Lamba") {
+							srNew.sprite = spriteLamba;
+						}
+					}
+					}
 					break;
 				case ElementType.Earthing:
 					go = Instantiate(ElementList.TheList.RcElements[5]);
@@ -129,5 +167,52 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 		float spawnY = Input.mousePosition.y * verticalUnitperPixel - orthoSize;
 		return new Vector3(spawnX, spawnY, z);
     }
+
+	void scanScene(){
+		objs =  UnityEngine.Object.FindObjectsOfType<GameObject>() ;
+		foundRes = 0;
+		foundBattery = 0;
+		foundLamb = 0;
+
+		foreach (GameObject element in objs) {
+			if (element.name.Contains ("Resistance") && (!element.name.Contains ("UI"))) {
+				if(foundRes == 0){
+					sprts = element.GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer sr in sprts ){
+						if (sr.tag == "Direnc") {
+							spriteDirenc = sr.sprite;
+						}
+					}
+					foundRes = 1;
+				}
+
+			
+
+			} else if (element.name.Contains ("Battery") && (!element.name.Contains ("UI"))) {
+				if(foundBattery == 0){
+					sprts = element.GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer sr in sprts ){
+						if (sr.tag == "Pil") {
+							spritePil = sr.sprite;
+						}
+					}
+					foundBattery = 1;
+				}
+
+
+			} else if (element.name.Contains ("Lamp") && (!element.name.Contains ("UI"))) {
+				if(foundLamb == 0){
+					sprts = element.GetComponentsInChildren<SpriteRenderer>();
+					foreach(SpriteRenderer sr in sprts ){
+						if (sr.tag == "Lamba") {
+							spriteLamba = sr.sprite;
+						}
+					}
+					foundLamb = 1;
+				}
+			}
+		}
+	
+	}
 
 }

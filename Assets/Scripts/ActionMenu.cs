@@ -16,6 +16,9 @@ public class ActionMenu : MonoBehaviour {
     private EdgeHandler[] edges;
 
     public InputField valueField;
+    public InputField amperField;
+    public GameObject amperFieldHolder;
+
     bool firstTime = true;
 
 
@@ -73,18 +76,23 @@ public class ActionMenu : MonoBehaviour {
         switch (type)
         {
             case "Resistance":
-                valueField.text = circuitElement.temporaryResistance + "";
+                valueField.text = circuitElement.temporaryResistance + " Ω";
+                amperFieldHolder.SetActive(true);
+                amperField.text = circuitElement.amper + " A";
 				valueField.interactable = true;
                 break;
 
             case "Battery":
-                valueField.text = circuitElement.temporaryVoltage + "";
-				valueField.interactable = true;
+                valueField.text = circuitElement.temporaryVoltage + " V";
+                amperFieldHolder.SetActive(false);
+                valueField.interactable = true;
                 break;
 
             case "Lamp":
-                valueField.text = circuitElement.temporaryResistance + "";
-				valueField.interactable = true;
+                valueField.text = circuitElement.temporaryResistance + " Ω";
+                amperField.text = circuitElement.amper + " A";
+                amperFieldHolder.SetActive(true);
+                valueField.interactable = true;
                 break;
 
                 //temp
@@ -103,12 +111,14 @@ public class ActionMenu : MonoBehaviour {
 					valueField.text =  CircuitTraversal.instance.GetNodeAt(nodeID) + "";
 				}
                 valueField.interactable = false;
+                amperFieldHolder.SetActive(false);
                 break;
 
                 //temp
             case "Switch":
                 valueField.text = circuitElement.temporaryResistance + "";
 				valueField.interactable = false;
+                amperFieldHolder.SetActive(false);
                 break;
 
             default:
