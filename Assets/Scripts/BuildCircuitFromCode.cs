@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 
 
 public class BuildCircuitFromCode : MonoBehaviour {
@@ -51,7 +51,7 @@ public class BuildCircuitFromCode : MonoBehaviour {
 	}
 
 	void TaskOnClick(){
-		Debug.Log ("The code entered : "+circuit_code.text);
+/*		Debug.Log ("The code entered : "+circuit_code.text);
 		 checking = inputValidate (circuit_code.text);
 		Debug.Log ("CHECKıNG : " + checking);
 
@@ -68,7 +68,7 @@ public class BuildCircuitFromCode : MonoBehaviour {
 			EditorUtility.DisplayDialog("Circuit Building From Code",
 				"Your input is invalid so check it then try again!! " , "OK");
 			
-		}
+		}*/
 			
 	}
 
