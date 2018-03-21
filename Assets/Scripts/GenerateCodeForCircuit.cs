@@ -232,12 +232,12 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 			SaveSystem.instance.Save (1);
 
 		}
-		if (GUI.Button (new Rect (100, 220, 75, 30), "Save2")) {
+		if (GUI.Button (new Rect (150, 200, 75, 30), "Save2")) {
 
 			SaveSystem.instance.saveCode = generalCode;
 			SaveSystem.instance.Save (2);
 		}
-		if (GUI.Button (new Rect (150, 240, 75, 30), "Save3")) {
+		if (GUI.Button (new Rect (250, 200, 75, 30), "Save3")) {
 
 			SaveSystem.instance.saveCode = generalCode;
 			SaveSystem.instance.Save (3);
