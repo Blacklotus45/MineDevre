@@ -43,6 +43,8 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 	}
 	
 	void TaskOnClick(){
+		generalCode = "";
+
 		resistance_code = "e";
 		battery_code = "e";
 		lamb_code = "e";
@@ -183,8 +185,8 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 			}
 		
 	  }
-		if(resistance_code[0].Equals('e') && (resistance_code.Length != 1)){
-			resistance_code = resistance_code.Substring (0);
+		if((resistance_code[0].Equals('e') || resistance_code[0] == 'e') && (resistance_code.Length != 1)){
+			resistance_code = resistance_code.Substring (1);
 		}
 
 		generalCode = resistance_code + "%" + battery_code + "%"+ lamb_code + "%"  + wire_code + "%" +  switch_code + "%" + connector_code + "%"+ earthing_code + "%";

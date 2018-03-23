@@ -21,6 +21,8 @@ public class BuildCircuitFromCode : MonoBehaviour {
 
 	GameObject[] objs;
 
+
+
 	string[] allElements;
 	string[] resistance_general;
 	string[] resistance_values;
@@ -60,7 +62,10 @@ public class BuildCircuitFromCode : MonoBehaviour {
 
 	public void TaskOnClick(){
 		Debug.Log ("The code entered : "+circuit_code.text);
-		 checking = inputValidate (circuit_code.text);
+
+
+		checking = inputValidate (circuit_code.text);
+
 		Debug.Log ("CHECKıNG : " + checking);
 
 		if (checking) {
