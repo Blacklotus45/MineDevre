@@ -83,6 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5223f8d3e0f4575a398d0093e7771b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  comp_spritePil: {fileID: 21300000, guid: e73f5e26c077fb7458b9cc12d2e81a02, type: 3}
+  comp_spriteDirenc: {fileID: 21300000, guid: 9389f5015f4b98441b6c76c2d4add5c3, type: 3}
+  comp_spriteLamba: {fileID: 21300000, guid: d67fb16d4a8086340acd6f4fda22a632, type: 3}
   typeOfItem: 5
 --- !u!114 &114723169935670660
 MonoBehaviour:

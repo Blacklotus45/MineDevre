@@ -29,6 +29,7 @@ public class SwapSprites : MonoBehaviour {
 		top = transform.root.gameObject;
 		Debug.Log (top.name + "!!!!");
 
+		//GameObject.FindObjectOfType<DragHandeler> ().incrementChanges ();
 
 		objs =  UnityEngine.Object.FindObjectsOfType<GameObject>() ;
 
