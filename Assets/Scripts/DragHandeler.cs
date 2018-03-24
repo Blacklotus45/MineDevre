@@ -147,14 +147,15 @@ public class DragHandeler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 					break;
 				case ElementType.Lamp:
 					go = Instantiate(ElementList.TheList.RcElements[4]);
-					
-				if(isSpriteChanged){
-					sprtsNew = go.GetComponentsInChildren<SpriteRenderer>();
-					foreach(SpriteRenderer srNew in sprtsNew ){
-						if (srNew.tag == "Lamba") {
-							srNew.sprite = comp_spriteLamba;
-						}
-					}
+                    go.name = "Lamp " + id;
+                    id++;
+				    if(isSpriteChanged){
+					    sprtsNew = go.GetComponentsInChildren<SpriteRenderer>();
+					    foreach(SpriteRenderer srNew in sprtsNew ){
+						    if (srNew.tag == "Lamba") {
+							    srNew.sprite = comp_spriteLamba;
+						    }
+					    }
 					}
 					break;
 				case ElementType.Earthing:
