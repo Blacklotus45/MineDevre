@@ -39,7 +39,10 @@ public class ObjectClicker : MonoBehaviour {
 				//done for connector object, more efficient structure maybe used here
 				if (hit.transform.parent == null)
 				{
-					actionMenu.selectedElement = hit.transform.gameObject;
+                    actionMenu.selectedElement = hit.transform.gameObject;
+                    actionMenu.updateActionPanelValuesAndLocation();
+                    Vector3 v = Camera.main.WorldToScreenPoint(hit.transform.position);
+                    actionMenu.SetVisible(v);
                 }
 				else //circuit elements
 				{

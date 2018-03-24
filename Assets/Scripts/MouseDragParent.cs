@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseDragParent : MonoBehaviour {
 
 	float distance = 30f;
-    public GameObject actionPanel;
+    private GameObject actionPanel;
 
     void Start()
     {
@@ -16,16 +16,15 @@ public class MouseDragParent : MonoBehaviour {
 	{
 		if (gameObject.GetComponentInParent<CircuitElement> () != null)
 		{
-			if (gameObject.GetComponentInParent<CircuitElement> ().isLocked)
+            if (gameObject.GetComponentInParent<CircuitElement> ().isLocked)
 			{
-				return;
+                return;
 			}
 		}
 		else if (gameObject.GetComponentInParent<EarthlingNode>() != null)
 		{
-			//check if its connected
-		}
-
+            //check if its connected
+        }
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition) - transform.localPosition;
 

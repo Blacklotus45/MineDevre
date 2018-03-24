@@ -15,9 +15,17 @@ public class ActionMenu : MonoBehaviour {
 
     private EdgeHandler[] edges;
 
+    public GameObject valueFieldHolder;
     public InputField valueField;
-    public InputField amperField;
+
     public GameObject amperFieldHolder;
+    public InputField amperField;
+
+
+    public GameObject applyBtnHolder;
+
+    public GameObject rectanglePanel;
+    public GameObject circlePanel;
 
     bool firstTime = true;
 
@@ -72,27 +80,41 @@ public class ActionMenu : MonoBehaviour {
 
         //valueField.text = circuitElement.temporaryVal + "";
 
+
+
         string type = circuitElement.typeOfItem.ToString();
         switch (type)
         {
             case "Resistance":
                 valueField.text = circuitElement.temporaryResistance + " Ω";
                 amperFieldHolder.SetActive(true);
+                applyBtnHolder.SetActive(true);
                 amperField.text = circuitElement.amper + " A";
 				valueField.interactable = true;
+                valueFieldHolder.SetActive(true);
+                rectanglePanel.SetActive(true);
+                circlePanel.SetActive(false);
                 break;
 
             case "Battery":
                 valueField.text = circuitElement.temporaryVoltage + " V";
                 amperFieldHolder.SetActive(false);
+                applyBtnHolder.SetActive(true);
                 valueField.interactable = true;
+                valueFieldHolder.SetActive(true);
+                rectanglePanel.SetActive(true);
+                circlePanel.SetActive(false);
                 break;
 
             case "Lamp":
                 valueField.text = circuitElement.temporaryResistance + " Ω";
                 amperField.text = circuitElement.amper + " A";
                 amperFieldHolder.SetActive(true);
+                valueFieldHolder.SetActive(true);
+                applyBtnHolder.SetActive(true);
                 valueField.interactable = true;
+                rectanglePanel.SetActive(true);
+                circlePanel.SetActive(false);
                 break;
 
                 //temp
@@ -111,7 +133,13 @@ public class ActionMenu : MonoBehaviour {
 					valueField.text =  CircuitTraversal.instance.GetNodeAt(nodeID) + "";
 				}
                 valueField.interactable = false;
+                valueFieldHolder.SetActive(true);
                 amperFieldHolder.SetActive(false);
+                applyBtnHolder.SetActive(false);
+                rectanglePanel.SetActive(false);
+                circlePanel.SetActive(true);
+
+
                 break;
 
                 //temp
@@ -119,11 +147,40 @@ public class ActionMenu : MonoBehaviour {
                 valueField.text = circuitElement.temporaryResistance + "";
 				valueField.interactable = false;
                 amperFieldHolder.SetActive(false);
+                applyBtnHolder.SetActive(false);
+                rectanglePanel.SetActive(false);
+                circlePanel.SetActive(true);
+                break;
+
+            case "Earthing":
+                amperFieldHolder.SetActive(false);
+                valueFieldHolder.SetActive(false);
+                applyBtnHolder.SetActive(false);
+                rectanglePanel.SetActive(true);
+                circlePanel.SetActive(false);
+                break;
+
+            case "Connector":
+                //Connector does not contain CircuitElement script,
+                //Adjustments made below.
                 break;
 
             default:
                 break;
         }
+
+        print(selectedElement.name);
+
+        if (selectedElement.name.Contains("Connector"))
+        {
+            amperFieldHolder.SetActive(false);
+            valueFieldHolder.SetActive(false);
+            applyBtnHolder.SetActive(false);
+            rectanglePanel.SetActive(true);
+            circlePanel.SetActive(false);
+        }
+
+
     }
 
     public void OnClick(string actionName)
