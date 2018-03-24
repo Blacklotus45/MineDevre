@@ -235,7 +235,7 @@ public class BuildCircuitFromCode : MonoBehaviour {
 				y = float.Parse (lamb_values[2]);
 
 				GameObject clone = (GameObject)Instantiate (lamb_prefab, new Vector3 (x, y, 0), Quaternion.identity);
-				clone.name = "Lamb " + i;
+				clone.name = "Lamp " + i;
 			}
 		}
 
