@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class CircuitTraversal : MonoBehaviour {
 
 	public static CircuitTraversal instance;
@@ -402,43 +404,32 @@ public class CircuitTraversal : MonoBehaviour {
             float voltRight = CircuitTraversal.instance.GetNodeAt(element.rightSide.nodeId);
             float voltLeft = CircuitTraversal.instance.GetNodeAt(element.leftSide.nodeId);
 
-            print("voltRight: " + voltRight);
-            print("voltLeft: " + voltLeft);
-
-            //float voltRight = (float)element.rightSide.temporaryVoltage;
-
-
-            //float voltLeft = (float)element.leftSide.temporaryVoltage;
+            //print("voltRight: " + voltRight);
+            //print("voltLeft: " + voltLeft);
 
             float voltDif;
+            SpriteRenderer arrow = element.GetComponentInChildren<SpriteRenderer>();
+            arrow.enabled = true;
 
-            bool fromLeftToRight;
-
-            if (voltRight > voltLeft)
-            {
-                fromLeftToRight = false;
+            if (voltRight > voltLeft) {
+                element.amperDirectionLeftToRight = false; //This is not used. Maybe can be used later
+                arrow.transform.localScale = new Vector3(-arrow.transform.localScale.x, arrow.transform.localScale.y, arrow.transform.localScale.z); //Arrow sprite direction is changed
                 voltDif = voltRight - voltLeft;
             }
-            else
-            {
-                fromLeftToRight = true;
+            else {
+                element.amperDirectionLeftToRight = true; //This is not used. Maybe can be used later
                 voltDif = voltLeft - voltRight;
             }
 
-            print( "resistans: " + element.temporaryResistance);
-
-            print("voltDif: " + voltDif);
+            //print( "resistans: " + element.temporaryResistance);
+            //print("voltDif: " + voltDif);
 
             float amper = voltDif / element.temporaryResistance;
-
             element.amper = amper;
 
-            print(element.temporaryResistance + " değerli resistans uzerindeki amper: " + amper);
-
-        }
-        
-
+            print("Amper passing on " + element.temporaryResistance + " valued resistance is: " + amper);
+        } 
     }
 
-
 }
+ 

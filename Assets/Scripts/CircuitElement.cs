@@ -20,6 +20,9 @@ public class CircuitElement : MonoBehaviour {
     public int temporaryVoltage;
     public float amper;
 
+    public bool amperDirectionLeftToRight = true; //This is not used. Maybe can be used later
+
+
     public int checkSum = 0;					//Checksum is used for checked connectivity, 1 is for looked in single directipn 2 for both
 
 	public ElementType typeOfItem;
