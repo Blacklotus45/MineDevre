@@ -13,6 +13,7 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 	private bool showPopUp = false;
 	private CircuitElement circuitElement;
 	private CircuitElement circuitElement2;
+	private CircuitElement circuitElement3;
 
 
 	public string generalCode;
@@ -107,10 +108,13 @@ public class GenerateCodeForCircuit : MonoBehaviour {
 
 				if (lamb_counter == 0) {
 					lamb_code = "";
-					resistance_counter++;
+					lamb_counter++;
 				}
 
 				lamb_counter = lamb_counter + 1;
+
+				circuitElement3 = element.GetComponent<CircuitElement>();
+				tempStorage = circuitElement3.temporaryResistance+"";
 
 				tempX = System.Math.Round (element.transform.position.x,2);
 				tempY = System.Math.Round (element.transform.position.y,2);

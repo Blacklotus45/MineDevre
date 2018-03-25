@@ -236,6 +236,7 @@ public class BuildCircuitFromCode : MonoBehaviour {
 
 				GameObject clone = (GameObject)Instantiate (lamb_prefab, new Vector3 (x, y, 0), Quaternion.identity);
 				clone.name = "Lamp " + i;
+				clone.GetComponent<CircuitElement> ().temporaryResistance = int.Parse (lamb_values[0]);
 			}
 		}
 
