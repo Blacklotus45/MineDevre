@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Switch : CircuitElement {
 
-	public bool isClosed = true;
+	public bool isClosed = false;
 }
