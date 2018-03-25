@@ -110,11 +110,13 @@ public class CircuitTraversal : MonoBehaviour {
 						if (iterator.GetComponent<Switch> ().isClosed)
 						{
 							//Behavior like a Wire
+							Debug.Log("Switch is closed");
 							iterator.checkSum = 2;
 							iterator.nodeId = nodalID;
 						}
 						else
 						{
+							Debug.Log("Switch is open");
 							//Behavior like a Node Change element
 							nextItems = iterator.GetNeighbour ();
 							if (nextItems != null)

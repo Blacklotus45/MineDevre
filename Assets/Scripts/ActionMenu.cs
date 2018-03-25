@@ -248,14 +248,17 @@ public class ActionMenu : MonoBehaviour {
         switch (type)
         {
             case "Resistance":
+            	Debug.Log("I took in:\"" + valueField.text + "\"");
                 circuitElement.temporaryResistance = int.Parse(valueField.text);
                 break;
 
             case "Battery":
+				Debug.Log("I took in:\"" + valueField.text + "\"");
                 circuitElement.temporaryVoltage = int.Parse(valueField.text);
                 break;
 
             case "Lamp":
+				Debug.Log("I took in:\"" + valueField.text + "\"");
                 circuitElement.temporaryResistance = int.Parse(valueField.text);
                 break;
 

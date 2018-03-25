@@ -15,6 +15,12 @@ public class DoubleClickSwitch : MonoBehaviour {
 
 	float delay = 0.3f;
 
+	private Switch closeFlag;
+
+	void Start()
+	{
+		closeFlag = gameObject.GetComponent<Switch>();
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -43,10 +49,14 @@ public class DoubleClickSwitch : MonoBehaviour {
 						if (sr.sprite == spriteAnahtar1) // if the spriteRenderer sprite = sprite1 then change to sprite2
 						{
 							sr.sprite = spriteAnahtar2;
+							closeFlag.isClosed = true;
+							Debug.Log("Switch is Closed");
 						}
 						else
 						{
 							sr.sprite = spriteAnahtar1; // otherwise change it back to sprite1
+							closeFlag.isClosed = false;
+							Debug.Log("Switch is Open");
 						}
 					}
 
