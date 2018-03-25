@@ -409,9 +409,15 @@ public class CircuitTraversal : MonoBehaviour {
 
             float voltDif;
             SpriteRenderer arrow = element.GetComponentInChildren<SpriteRenderer>();
+
             arrow.enabled = true;
 
-            if (voltRight > voltLeft) {
+            if (voltRight == voltLeft)
+            {
+                arrow.enabled = false;
+                voltDif = voltRight - voltLeft;
+            }
+            else if (voltRight > voltLeft) {
                 element.amperDirectionLeftToRight = false; //This is not used. Maybe can be used later
                 arrow.transform.localScale = new Vector3(-arrow.transform.localScale.x, arrow.transform.localScale.y, arrow.transform.localScale.z); //Arrow sprite direction is changed
                 voltDif = voltRight - voltLeft;
