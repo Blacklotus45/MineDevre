@@ -29,7 +29,7 @@ public class CircuitTraversal : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
-
+		
 		//BeginTraversal();	
 	}
 
